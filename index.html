@@ -8,21 +8,142 @@
     <style>
         /* Custom styles for a more modern, blended look */
         .hero-bg-image {
-            background-image: url('https://source.unsplash.com/1600x900/?tech,abstract-tech,circuit'); /* Dynamic tech-themed background */
+            background-image: url('https://t4.ftcdn.net/jpg/04/14/22/55/360_F_414225555_k4FE9n2fjaBen0QlOW1kSjaQBWfjfCjF.jpg'); /* Dynamic tech-themed background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             /* Optional: Add a subtle overlay for text readability if needed */
-            /* background-blend-mode: overlay; */
+            /* background-blend-mode: overlay; */ */
             /* background-color: rgba(255, 255, 255, 0.1); */
         }
 
         /* Seamless header blending (adjust padding/margin as needed for exact blend) */
-        /* For a true blend, the header might have a transparent or semi-transparent background */
         header {
             background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
             backdrop-filter: blur(5px); /* Modern frosted glass effect */
             -webkit-backdrop-filter: blur(5px); /* Safari support */
+        }
+
+        /* Custom animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .delay-200 { animation-delay: 0.2s; } /* Example for staggered animation */
+
+        /* Specific score badge styling for product cards */
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem; /* text-sm */
+            padding: 0.25rem 0.625rem; /* py-1 px-2.5, slightly adjusted for oval */
+            border-radius: 9999px; /* full rounded */
+            white-space: nowrap;
+        }
+
+        .score-good {
+            background-color: #d1fae5; /* bg-green-100 */
+            color: #059669; /* text-green-700 */
+        }
+        .score-avg {
+            background-color: #fee2e2; /* bg-red-100 */
+            color: #ef4444; /* text-red-500 */
+        }
+        .score-excellent {
+            background-color: #dbeafe; /* bg-blue-100 */
+            color: #2563eb; /* text-blue-600 */
+        }
+         /* Custom styles for consistency with the overall design language */
+         body {
+            background-color: #f9fafb; /* bg-gray-50 */
+            font-family: sans-serif; /* font-sans */
+            color: #374151; /* text-gray-800 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Specific score badge styling for product cards and detail page */
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.875rem; /* text-sm */
+            padding: 0.25rem 0.625rem; /* py-1 px-2.5, slightly adjusted for oval */
+            border-radius: 9999px; /* full rounded */
+            white-space: nowrap;
+        }
+
+        .score-good {
+            background-color: #d1fae5; /* bg-green-100 */
+            color: #059669; /* text-green-700 */
+        }
+        .score-avg {
+            background-color: #fee2e2; /* bg-red-100 */
+            color: #ef4444; /* text-red-500 */
+        }
+        .score-excellent {
+            background-color: #dbeafe; /* bg-blue-100 */
+            color: #2563eb; /* text-blue-600 */
+        }
+
+        /* Larger score badge for detail page */
+        .score-badge-lg {
+            font-size: 1.125rem; /* text-lg */
+            padding: 0.5rem 1rem;
+        }
+
+        /* Custom styling for details/summary (collapsible section) */
+        details summary {
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            background-color: #f3f4f6; /* bg-gray-100 */
+            font-weight: 600; /* font-semibold */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.2s ease-in-out;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+        }
+
+        details summary:hover {
+            background-color: #e5e7eb; /* bg-gray-200 */
+        }
+
+        details[open] summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        details summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        details[open] summary::after {
+            content: '-';
+            transform: rotate(0deg); /* No rotation needed for '-' */
+        }
+
+        details .content {
+            padding: 1rem;
+            background-color: #ffffff; /* bg-white */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            border-top: none;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
         }
     </style>
 </head>
@@ -70,47 +191,246 @@
             </div>
         </section>
 
-        <section class="container mx-auto p-8 pt-20"> <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Featured Reviews</h2>
-            <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Next-Gen Smartphone X</h3>
-                    <p class="text-gray-600 text-sm mb-4">A deep dive into the latest smartphone with groundbreaking camera technology and AI features.</p>
-                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <span>Rating: <span class="font-bold text-blue-600">9.2/10</span></span>
-                        <span>Category: Mobile</span>
+        <section class="container mx-auto p-8 pt-20">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Featured Reviews</h2>
+            <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+                <a href="#" class="block
+                    bg-white rounded-xl shadow-lg p-6
+                    transform hover:scale-103 transition-all duration-300
+                    border border-gray-100 hover:border-blue-200
+                    flex flex-col justify-between cursor-pointer
+                    overflow-hidden group"
+                >
+                    <div>
+                        <div class="flex justify-center mb-4 overflow-hidden rounded-lg">
+                            <img
+                                src="https://placehold.co/200x200/F0F4F8/6B7280/png?text=Smartphone+X"
+                                alt="Smartphone X"
+                                class="max-w-full h-auto rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-300"
+                            >
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1 leading-tight">Smartphone X</h3>
+                        <p class="text-sm text-gray-500 mb-4">Brand: <span class="font-semibold text-gray-600">GlobalTech</span></p>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-y-2 sm:gap-x-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="score-badge score-excellent">
+                                    92/100
+                                </span>
+                                <span class="text-sm font-medium text-gray-600">Critics Score</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg text-yellow-500">&#9733;</span>
+                                <span class="text-sm font-medium text-gray-600">4.8/5 Audience Rating</span>
+                            </div>
+                        </div>
                     </div>
-                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Ultra-Light Laptop Pro</h3>
-                    <p class="text-gray-600 text-sm mb-4">Experience unparalleled portability and power with this new contender in the laptop market.</p>
-                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <span>Rating: <span class="font-bold text-green-600">8.9/10</span></span>
-                        <span>Category: Laptops</span>
+                    <button class="mt-4 w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+                        View Details
+                    </button>
+                </a>
+
+                <a href="#" class="block
+                    bg-white rounded-xl shadow-lg p-6
+                    transform hover:scale-103 transition-all duration-300
+                    border border-gray-100 hover:border-blue-200
+                    flex flex-col justify-between cursor-pointer
+                    overflow-hidden group"
+                >
+                    <div>
+                        <div class="flex justify-center mb-4 overflow-hidden rounded-lg">
+                            <img
+                                src="https://placehold.co/200x200/F0F4F8/6B7280/png?text=Laptop+Pro"
+                                alt="Laptop Pro"
+                                class="max-w-full h-auto rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-300"
+                            >
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1 leading-tight">Laptop Pro 2025</h3>
+                        <p class="text-sm text-gray-500 mb-4">Brand: <span class="font-semibold text-gray-600">Zenith Labs</span></p>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-y-2 sm:gap-x-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="score-badge score-good">
+                                    85/100
+                                </span>
+                                <span class="text-sm font-medium text-gray-600">Critics Score</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg text-yellow-500">&#9733;</span>
+                                <span class="text-sm font-medium text-gray-600">4.5/5 Audience Rating</span>
+                            </div>
+                        </div>
                     </div>
-                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Smart Home Hub v3</h3>
-                    <p class="text-gray-600 text-sm mb-4">Centralize your smart home with this intuitive and secure new generation hub.</p>
-                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <span>Rating: <span class="font-bold text-purple-600">9.5/10</span></span>
-                        <span>Category: Smart Home</span>
+                    <button class="mt-4 w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+                        View Details
+                    </button>
+                </a>
+
+                <a href="#" class="block
+                    bg-white rounded-xl shadow-lg p-6
+                    transform hover:scale-103 transition-all duration-300
+                    border border-gray-100 hover:border-blue-200
+                    flex flex-col justify-between cursor-pointer
+                    overflow-hidden group"
+                >
+                    <div>
+                        <div class="flex justify-center mb-4 overflow-hidden rounded-lg">
+                            <img
+                                src="https://placehold.co/200x200/F0F4F8/6B7280/png?text=Smartwatch+Elite"
+                                alt="Smartwatch Elite"
+                                class="max-w-full h-auto rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-300"
+                            >
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1 leading-tight">Smartwatch Elite</h3>
+                        <p class="text-sm text-gray-500 mb-4">Brand: <span class="font-semibold text-gray-600">Chronos</span></p>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-y-2 sm:gap-x-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="score-badge score-avg">
+                                    78/100
+                                </span>
+                                <span class="text-sm font-medium text-gray-600">Critics Score</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg text-yellow-500">&#9733;</span>
+                                <span class="text-sm font-medium text-gray-600">4.1/5 Audience Rating</span>
+                            </div>
+                        </div>
                     </div>
-                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
+                    <button class="mt-4 w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+                        View Details
+                    </button>
+                </a>
+
+                <a href="#" class="block
+                    bg-white rounded-xl shadow-lg p-6
+                    transform hover:scale-103 transition-all duration-300
+                    border border-gray-100 hover:border-blue-200
+                    flex flex-col justify-between cursor-pointer
+                    overflow-hidden group"
+                >
+                    <div>
+                        <div class="flex justify-center mb-4 overflow-hidden rounded-lg">
+                            <img
+                                src="https://placehold.co/200x200/F0F4F8/6B7280/png?text=Wireless+Earbuds"
+                                alt="Wireless Earbuds"
+                                class="max-w-full h-auto rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-300"
+                            >
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1 leading-tight">AcousticFlow Earbuds</h3>
+                        <p class="text-sm text-gray-500 mb-4">Brand: <span class="font-semibold text-gray-600">AudioLux</span></p>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-y-2 sm:gap-x-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="score-badge score-excellent">
+                                    90/100
+                                </span>
+                                <span class="text-sm font-medium text-gray-600">Critics Score</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg text-yellow-500">&#9733;</span>
+                                <span class="text-sm font-medium text-gray-600">4.6/5 Audience Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+                        View Details
+                    </button>
+                </a>
                 </div>
-            </div>
         </section>
 
 
         <div id="product-detail" class="hidden mt-8 p-6 bg-white rounded-lg shadow-lg container mx-auto">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Product Detail Page</h2>
-            <p class="text-gray-700 mb-4">This section will display detailed information about a single product, including its specifications, reviews, and images.</p>
-            <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onclick="document.getElementById('product-detail').classList.add('hidden'); document.getElementById('product-list').classList.remove('hidden');">Back to Products</button>
+            <div class="bg-white rounded-xl shadow-lg p-8 relative">
+                <!-- Back to Products Button -->
+                <button id="back-to-products-btn" class="absolute top-4 right-4 px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors duration-200 text-sm font-medium">
+                    &larr; Back to Products
+                </button>
+        
+                <div class="flex flex-col md:flex-row gap-8 mt-12">
+                    <!-- Left Column: Large Product Image -->
+                    <div class="md:w-1/2 flex justify-center items-start">
+                        <img 
+                            id="product-detail-image"
+                            src="https://placehold.co/600x400/F0F4F8/6B7280/png?text=Product+Detail+Image"
+                            alt="iPhone 16 Pro Max Detail"
+                            class="w-full max-w-lg rounded-xl shadow-md object-cover"
+                        >
+                    </div>
+        
+                    <!-- Right Column: Product Details, Scores, Specs, Pros & Cons -->
+                    <div class="md:w-1/2 flex flex-col">
+                        <!-- Product Name, Brand, Category -->
+                        <h2 id="product-detail-name" class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 leading-tight">
+                            iPhone 16 Pro Max
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-2">Brand: <span id="product-detail-brand" class="font-semibold text-gray-800">Apple</span></p>
+                        <p class="text-lg text-gray-600 mb-6">Category: <span id="product-detail-category" class="font-semibold text-gray-800">Smartphones</span></p>
+        
+                        <!-- Critics Score & Audience Rating -->
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-y-4 sm:gap-x-8 mb-8">
+                            <!-- Critics Score -->
+                            <div class="flex items-center space-x-3">
+                                <span id="product-detail-critics-score" class="score-badge score-excellent score-badge-lg">
+                                    93/100
+                                </span>
+                                <span class="text-lg font-semibold text-gray-700">Critics Score</span>
+                            </div>
+        
+                            <!-- Audience Rating -->
+                            <div class="flex items-center space-x-3">
+                                <span class="text-3xl text-yellow-500">&#9733;</span> <!-- Larger Unicode star -->
+                                <span id="product-detail-audience-rating" class="text-lg font-semibold text-gray-700">4.9/5 Audience Rating</span>
+                            </div>
+                        </div>
+        
+                        <!-- Key Specifications -->
+                        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-100">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Key Specifications</h3>
+                            <ul id="product-detail-key-specs" class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>**Display:** 6.7-inch Super Retina XDR ProMotion</li>
+                                <li>**Processor:** A18 Bionic Chip</li>
+                                <li>**RAM:** 12GB</li>
+                                <li>**Storage:** 256GB / 512GB / 1TB</li>
+                                <li>**Camera:** Triple 48MP Pro Camera System</li>
+                                <li>**Battery:** All-day battery life (estimated)</li>
+                                <li>**Operating System:** iOS 19</li>
+                            </ul>
+                        </div>
+        
+                        <!-- Collapsible AI-Generated Pros & Cons Summary -->
+                        <details class="mb-4">
+                            <!-- <button  class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full text-sm mb-4">
+                                Show Pros & Cons
+                            </button> -->
+                            <summary id="pros-cons-toggle-btn" class="text-lg text-gray-800">
+                                AI-Generated Pros & Cons Summary
+                            </summary>
+                            <div id="pros-cons-content" class="content">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-3">Pros:</h4>
+                                <ul id="product-detail-pros" class="list-disc list-inside space-y-1 text-gray-700 mb-4">
+                                    <li>Unrivaled performance with A18 Bionic.</li>
+                                    <li>Stunning display with adaptive refresh rate.</li>
+                                    <li>Exceptional camera capabilities, especially in low light.</li>
+                                    <li>Robust build quality and premium materials.</li>
+                                    <li>Seamless integration within the Apple ecosystem.</li>
+                                </ul>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-3">Cons:</h4>
+                                <ul id="product-detail-cons" class="list-disc list-inside space-y-1 text-gray-700">
+                                    <li>Premium price point.</li>
+                                    <li>Limited customization options compared to Android.</li>
+                                    <li>Fast charging still lags behind some competitors.</li>
+                                    <li>Heavy for one-handed use.</li>
+                                </ul>
+                            </div>
+                        </details>
+        
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
     <script>
+        
         // Your JavaScript logic will go here.
         // For example, to switch between product list and product detail:
 
@@ -125,17 +445,906 @@
         // }
 
         // Optional: Smooth scroll for fixed header (if desired for navigation)
-        // document.querySelectorAll('nav a').forEach(anchor => {
-        //     anchor.addEventListener('click', function (e) {
-        //         e.preventDefault();
-        //         const targetId = this.getAttribute('href').substring(1);
-        //         if (targetId) { // Only scroll if there's a target ID
-        //             document.getElementById(targetId).scrollIntoView({
-        //                 behavior: 'smooth'
-        //             });
-        //         }
-        //     });
-        // });
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId) { // Only scroll if there's a target ID
+                    document.getElementById(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+const productsData = [
+  {
+    "productName": "iPhone 16 Pro",
+    "brand": "Apple",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=iPhone16Pro",
+    "keySpecs": {
+      "screenSize": "6.3\" ProMotion OLED",
+      "processor": "A18 Pro Chip",
+      "ram": "8GB RAM",
+      "storage": "256GB Storage",
+      "camera": "48MP Main Camera",
+      "battery": "All-Day Battery"
+    },
+    "criticReviews": [
+      {
+        "publication": "CNET",
+        "score": "8.9",
+        "scale": "out of 10",
+        "link": "https://example.com/cnet-iphone16pro"
+      },
+      {
+        "publication": "TechRadar",
+        "score": "4.5",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/techradar-iphone16pro"
+      }
+    ],
+    "audienceRating": "4.7/5",
+    "aiProsCons": {
+      "pros": [
+        "Advanced camera",
+        "powerful chip",
+        "durable design"
+      ],
+      "cons": [
+        "High price",
+        "incremental updates"
+      ]
+    }
+  },
+  {
+    "productName": "iPhone 16",
+    "brand": "Apple",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=iPhone16",
+    "keySpecs": {
+      "screenSize": "6.1\" Super Retina XDR",
+      "processor": "A18 Chip",
+      "ram": "6GB RAM",
+      "storage": "128GB Storage",
+      "camera": "48MP Main Camera",
+      "battery": "Improved Battery Life"
+    },
+    "criticReviews": [
+      {
+        "publication": "The Verge",
+        "score": "8.5",
+        "scale": "out of 10",
+        "link": "https://example.com/theverge-iphone16"
+      },
+      {
+        "publication": "PCMag",
+        "score": "4.0",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/pcmag-iphone16"
+      }
+    ],
+    "audienceRating": "4.5/5",
+    "aiProsCons": {
+      "pros": [
+        "Great display",
+        "solid performance",
+        "good battery"
+      ],
+      "cons": [
+        "Still uses Lightning",
+        "no ProMotion"
+      ]
+    }
+  },
+  {
+    "productName": "Google Pixel 9 Pro",
+    "brand": "Google",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Pixel9Pro",
+    "keySpecs": {
+      "screenSize": "6.7\" LTPO OLED",
+      "processor": "Tensor G4 Chip",
+      "ram": "12GB RAM",
+      "storage": "256GB Storage",
+      "camera": "Advanced AI Camera",
+      "battery": "Long Battery Life"
+    },
+    "criticReviews": [
+      {
+        "publication": "Engadget",
+        "score": "90",
+        "scale": "percent",
+        "link": "https://example.com/engadget-pixel9pro"
+      },
+      {
+        "publication": "Ars Technica",
+        "score": "8.8",
+        "scale": "out of 10",
+        "link": "https://example.com/arstechnica-pixel9pro"
+      }
+    ],
+    "audienceRating": "4.6/5",
+    "aiProsCons": {
+      "pros": [
+        "Exceptional camera",
+        "clean Android",
+        "strong AI features"
+      ],
+      "cons": [
+        "Tensor G4 heating",
+        "limited availability"
+      ]
+    }
+  },
+  {
+    "productName": "Google Pixel 9",
+    "brand": "Google",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Pixel9",
+    "keySpecs": {
+      "screenSize": "6.2\" OLED",
+      "processor": "Tensor G4 Chip",
+      "ram": "8GB RAM",
+      "storage": "128GB Storage",
+      "camera": "Dual Camera",
+      "design": "Compact Design"
+    },
+    "criticReviews": [
+      {
+        "publication": "Tom's Guide",
+        "score": "4.0",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/tomsguide-pixel9"
+      },
+      {
+        "publication": "Wired",
+        "score": "8.2",
+        "scale": "out of 10",
+        "link": "https://example.com/wired-pixel9"
+      }
+    ],
+    "audienceRating": "4.4/5",
+    "aiProsCons": {
+      "pros": [
+        "Excellent value",
+        "great software experience",
+        "good camera"
+      ],
+      "cons": [
+        "Battery life could be better",
+        "slower charging"
+      ]
+    }
+  },
+  {
+    "productName": "Samsung Galaxy S25 Ultra",
+    "brand": "Samsung",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S25Ultra",
+    "keySpecs": {
+      "screenSize": "6.8\" Dynamic AMOLED 2X",
+      "processor": "Snapdragon 8 Gen 4",
+      "ram": "12GB RAM",
+      "storage": "512GB Storage",
+      "camera": "200MP Camera",
+      "features": "S Pen"
+    },
+    "criticReviews": [
+      {
+        "publication": "CNET",
+        "score": "9.1",
+        "scale": "out of 10",
+        "link": "https://example.com/cnet-s25ultra"
+      },
+      {
+        "publication": "TechRadar",
+        "score": "5.0",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/techradar-s25ultra"
+      }
+    ],
+    "audienceRating": "4.8/5",
+    "aiProsCons": {
+      "pros": [
+        "Best-in-class display",
+        "versatile camera",
+        "S Pen integration"
+      ],
+      "cons": [
+        "Very expensive",
+        "bulky design"
+      ]
+    }
+  },
+  {
+    "productName": "Samsung Galaxy S25",
+    "brand": "Samsung",
+    "category": "Smartphone",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S25",
+    "keySpecs": {
+      "screenSize": "6.2\" Dynamic AMOLED 2X",
+      "processor": "Snapdragon 8 Gen 4",
+      "ram": "8GB RAM",
+      "storage": "128GB Storage",
+      "camera": "Triple Camera",
+      "design": "Sleek Design"
+    },
+    "criticReviews": [
+      {
+        "publication": "The Verge",
+        "score": "8.7",
+        "scale": "out of 10",
+        "link": "https://example.com/theverge-s25"
+      },
+      {
+        "publication": "PCMag",
+        "score": "4.2",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/pcmag-s25"
+      }
+    ],
+    "audienceRating": "4.6/5",
+    "aiProsCons": {
+      "pros": [
+        "Vibrant screen",
+        "powerful processor",
+        "good camera system"
+      ],
+      "cons": [
+        "Battery life average",
+        "design similar to previous"
+      ]
+    }
+  },
+  {
+    "productName": "MacBook Air M4 (13-inch)",
+    "brand": "Apple",
+    "category": "Laptop",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=MBAirM4",
+    "keySpecs": {
+      "screenSize": "13.6\" Liquid Retina",
+      "processor": "M4 Chip",
+      "memory": "8GB Unified Memory",
+      "storage": "256GB SSD",
+      "cooling": "Fanless Design",
+      "battery": "Up to 18 hrs battery"
+    },
+    "criticReviews": [
+      {
+        "publication": "CNET",
+        "score": "9.0",
+        "scale": "out of 10",
+        "link": "https://example.com/cnet-mbairm4"
+      },
+      {
+        "publication": "TechRadar",
+        "score": "4.5",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/techradar-mbairm4"
+      }
+    ],
+    "audienceRating": "4.8/5",
+    "aiProsCons": {
+      "pros": [
+        "Incredible performance",
+        "silent operation",
+        "amazing battery life"
+      ],
+      "cons": [
+        "Limited ports",
+        "no active cooling"
+      ]
+    }
+  },
+  {
+    "productName": "MacBook Pro M4 (14-inch)",
+    "brand": "Apple",
+    "category": "Laptop",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=MBProM4",
+    "keySpecs": {
+      "screenSize": "14.2\" Liquid Retina XDR",
+      "processor": "M4 Pro Chip",
+      "memory": "18GB Unified Memory",
+      "storage": "512GB SSD",
+      "displayTech": "ProMotion",
+      "battery": "Up to 22 hrs battery"
+    },
+    "criticReviews": [
+      {
+        "publication": "The Verge",
+        "score": "9.2",
+        "scale": "out of 10",
+        "link": "https://example.com/theverge-mbprom4"
+      },
+      {
+        "publication": "PCMag",
+        "score": "4.8",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/pcmag-mbprom4"
+      }
+    ],
+    "audienceRating": "4.9/5",
+    "aiProsCons": {
+      "pros": [
+        "Unmatched performance",
+        "stunning display",
+        "long battery",
+        "great ports"
+      ],
+      "cons": [
+        "Very expensive",
+        "heavy for portability"
+      ]
+    }
+  },
+  {
+    "productName": "Surface Laptop 7 (13.5-inch)",
+    "brand": "Microsoft",
+    "category": "Laptop",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=SL7",
+    "keySpecs": {
+      "screenSize": "13.5\" PixelSense",
+      "processor": "Snapdragon X Elite",
+      "ram": "16GB RAM",
+      "storage": "512GB SSD",
+      "design": "Slim Design",
+      "battery": "All-Day Battery"
+    },
+    "criticReviews": [
+      {
+        "publication": "Engadget",
+        "score": "88",
+        "scale": "percent",
+        "link": "https://example.com/engadget-sl7"
+      },
+      {
+        "publication": "Ars Technica",
+        "score": "8.5",
+        "scale": "out of 10",
+        "link": "https://example.com/arstechnica-sl7"
+      }
+    ],
+    "audienceRating": "4.3/5",
+    "aiProsCons": {
+      "pros": [
+        "Sleek design",
+        "excellent keyboard",
+        "good performance for everyday"
+      ],
+      "cons": [
+        "Limited software compatibility",
+        "higher price than competitors"
+      ]
+    }
+  },
+  {
+    "productName": "Dell XPS 14",
+    "brand": "Dell",
+    "category": "Laptop",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=XPS14",
+    "keySpecs": {
+      "screenSize": "14.5\" OLED",
+      "processor": "Intel Core Ultra 7",
+      "ram": "16GB RAM",
+      "storage": "1TB SSD",
+      "graphics": "NVIDIA RTX 4060",
+      "build": "Premium Build"
+    },
+    "criticReviews": [
+      {
+        "publication": "Tom's Guide",
+        "score": "4.5",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/tomsguide-xps14"
+      },
+      {
+        "publication": "Wired",
+        "score": "8.9",
+        "scale": "out of 10",
+        "link": "https://example.com/wired-xps14"
+      }
+    ],
+    "audienceRating": "4.6/5",
+    "aiProsCons": {
+      "pros": [
+        "Stunning OLED display",
+        "powerful performance",
+        "premium design"
+      ],
+      "cons": [
+        "Expensive",
+        "battery life could be better"
+      ]
+    }
+  },
+  {
+    "productName": "HP Spectre x360 14",
+    "brand": "HP",
+    "category": "Laptop",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Spectrex360",
+    "keySpecs": {
+      "screenSize": "14\" OLED Touch",
+      "processor": "Intel Core Ultra 7",
+      "ram": "16GB RAM",
+      "storage": "1TB SSD",
+      "design": "Convertible Design",
+      "battery": "Long Battery Life"
+    },
+    "criticReviews": [
+      {
+        "publication": "CNET",
+        "score": "8.7",
+        "scale": "out of 10",
+        "link": "https://example.com/cnet-hpspectre"
+      },
+      {
+        "publication": "TechRadar",
+        "score": "4.3",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/techradar-hpspectre"
+      }
+    ],
+    "audienceRating": "4.5/5",
+    "aiProsCons": {
+      "pros": [
+        "Gorgeous OLED",
+        "versatile 2-in-1",
+        "great audio"
+      ],
+      "cons": [
+        "Heavier than some rivals",
+        "stylus sold separately"
+      ]
+    }
+  },
+  {
+    "productName": "Samsung S95D OLED TV (65-inch)",
+    "brand": "Samsung",
+    "category": "TV",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S95D",
+    "keySpecs": {
+      "screenSize": "65\" QD-OLED",
+      "resolution": "4K Resolution",
+      "refreshRate": "144Hz Refresh Rate",
+      "features": "Anti-Reflection Screen, Smart TV Features"
+    },
+    "criticReviews": [
+      {
+        "publication": "RTINGS.com",
+        "score": "9.3",
+        "scale": "out of 10",
+        "link": "https://example.com/rtings-s95d"
+      },
+      {
+        "publication": "FlatpanelsHD",
+        "score": "9.5",
+        "scale": "out of 10",
+        "link": "https://example.com/flatpanelshd-s95d"
+      }
+    ],
+    "audienceRating": "4.8/5",
+    "aiProsCons": {
+      "pros": [
+        "Unrivaled picture quality",
+        "vibrant colors",
+        "excellent gaming features"
+      ],
+      "cons": [
+        "High price",
+        "minor blooming in extreme dark scenes"
+      ]
+    }
+  },
+  {
+    "productName": "LG G4 OLED TV (65-inch)",
+    "brand": "LG",
+    "category": "TV",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=G4OLED",
+    "keySpecs": {
+      "screenSize": "65\" OLED evo",
+      "resolution": "4K Resolution",
+      "refreshRate": "120Hz Refresh Rate",
+      "features": "Brightness Booster Max, Gallery Design"
+    },
+    "criticReviews": [
+      {
+        "publication": "What Hi-Fi?",
+        "score": "5",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/whathifi-g4"
+      },
+      {
+        "publication": "TechRadar",
+        "score": "4.8",
+        "scale": "out of 5 stars",
+        "link": "https://example.com/techradar-g4"
+      }
+    ],
+    "audienceRating": "4.7/5",
+    "aiProsCons": {
+      "pros": [
+        "Stunning brightness",
+        "perfect blacks",
+        "great sound",
+        "sleek design"
+      ],
+      "cons": [
+        "Still expensive",
+        "minor motion artifacts in some content"
+      ]
+    }
+  },
+  {
+    "productName": "Sony BRAVIA A95L OLED TV (65-inch)",
+    "brand": "Sony",
+    "category": "TV",
+    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=A95L",
+    "keySpecs": {
+      "screenSize": "65\" QD-OLED",
+      "resolution": "4K Resolution",
+      "processor": "Cognitive Processor XR",
+      "audio": "Acoustic Surface Audio+",
+      "smartTV": "Google TV"
+    },
+    "criticReviews": [
+      {
+        "publication": "Digital Trends",
+        "score": "9.0",
+        "scale": "out of 10",
+        "link": "https://example.com/digitaltrends-a95l"
+      },
+      {
+        "publication": "CNET",
+        "score": "9.2",
+        "scale": "out of 10",
+        "link": "https://example.com/cnet-a95l"
+      }
+    ],
+    "audienceRating": "4.9/5",
+    "aiProsCons": {
+      "pros": [
+        "Best-in-class image processing",
+        "immersive sound",
+        "excellent upscaling"
+      ],
+      "cons": [
+        "Fewer HDMI 2.1 ports",
+        "higher input lag than rivals"
+      ]
+    }
+  }
+];
+function displayProducts(products) {
+  const productListDiv = document.getElementById('product-list');
+  productListDiv.innerHTML = ''; // Clear existing content
+
+  products.forEach(product => {
+    const criticsScore = calculateCriticsScore(product.criticReviews);
+
+    const productCard = document.createElement('div');
+    productCard.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow-md', 'hover:shadow-xl', 'cursor-pointer');
+
+    productCard.innerHTML = `
+      <img src="${product.imageURL}" alt="${product.productName}" class="w-full h-32 object-contain mb-4">
+      <h3 class="text-lg font-semibold mb-1">${product.productName}</h3>
+      <p class="text-gray-600 text-sm mb-2">${product.brand}</p>
+      <div class="flex justify-between items-center mt-3">
+        <p class="text-sm font-medium text-gray-700">Critics Score: <span class="font-bold">${criticsScore}/100</span></p>
+        <p class="text-sm font-medium text-gray-700">Audience Rating: <span class="font-bold">${product.audienceRating}</span></p>
+      </div>
+    `;
+
+    productCard.addEventListener('click', () => showProductDetail(product));
+    productListDiv.appendChild(productCard);
+  });
+}
+
+/**
+ * Normalizes a numerical score from its original scale to a target scale using Min-Max normalization.
+ *
+ * @param {number} score The numerical score to normalize.
+ * @param {string} scale A string describing the original scale (e.g., 'out of 10', 'out of 5 stars', 'percent').
+ * @param {number} targetScale The desired maximum value of the normalized score (e.g., 100 for a 0-100 scale).
+ * @returns {number|null} The normalized score, or null if the scale is unknown or invalid.
+ */
+ function normalizeScore(score, scale, targetScale) {
+  let originalMax;
+
+  // Determine the maximum value of the original scale
+  if (scale === 'out of 10') {
+    originalMax = 10;
+  } else if (scale === 'out of 5 stars') {
+    originalMax = 5;
+  } else if (scale === 'percent') {
+    originalMax = 100; // Score is already a percentage
+  } else {
+    // If the scale is unknown or invalid, return null
+    console.warn(`Unknown or invalid scale: ${scale}`);
+    return null;
+  }
+
+  // Handle cases where the score might be outside the assumed originalMax for 'percent'
+  // or if score is invalid
+  if (score === null || typeof score !== 'number' || isNaN(score)) {
+    return null;
+  }
+
+  // Min-Max normalization formula: ((score - min_original) / (max_original - min_original)) * (max_target - min_target) + min_target
+  // Assuming min_original = 0 and min_target = 0 for simplicity, common in rating normalization [cite: 2, 3]
+  // Formula simplifies to: (score / max_original) * targetScale
+  
+  if (originalMax === 0) { // Avoid division by zero
+    return null;
+  }
+
+  // For 'percent' scale, the score is already proportional to 100, so directly scale to targetScale
+  if (scale === 'percent') {
+      return (score / 100) * targetScale;
+  } else {
+      return (score / originalMax) * targetScale;
+  }
+}
+
+/*
+// Example Usage based on the iPhone 16 critic reviews:
+const iPhone16CriticReviews = [
+  {
+    "publication": "The Verge",
+    "score": 8.5,
+    "scale": "out of 10",
+    "link": "https://example.com/theverge-iphone16"
+  },
+  {
+    "publication": "PCMag",
+    "score": 4.0,
+    "scale": "out of 5 stars",
+    "link": "https://example.com/pcmag-iphone16"
+  }
+];
+
+const targetScoreScale = 100; // Target scale for TechScore (0-100)
+
+console.log("Normalized Critic Scores for iPhone 16 (0-100 scale):");
+
+iPhone16CriticReviews.forEach(review => {
+  const normalized = normalizeScore(review.score, review.scale, targetScoreScale);
+  if (normalized !== null) {
+    console.log(`- ${review.publication}: Original ${review.score} ${review.scale} -> Normalized ${normalized.toFixed(2)} / ${targetScoreScale}`);
+  } else {
+    console.log(`- ${review.publication}: Original ${review.score} ${review.scale} -> Could not normalize (invalid scale or score)`);
+  }
+});
+
+// Example with a 'percent' score (dummy data for demonstration)
+const percentExample = {
+  "publication": "TechWeekly",
+  "score": 75,
+  "scale": "percent",
+  "link": "https://example.com/techweekly-review"
+};
+
+const normalizedPercent = normalizeScore(percentExample.score, percentExample.scale, targetScoreScale);
+if (normalizedPercent !== null) {
+  console.log(`- ${percentExample.publication}: Original ${percentExample.score} ${percentExample.scale} -> Normalized ${normalizedPercent.toFixed(2)} / ${targetScoreScale}`);
+}
+
+// Example with unknown scale
+const unknownScaleExample = {
+    "publication": "GizmoBlog",
+    "score": 7,
+    "scale": "out of 7",
+    "link": "https://example.com/gizmoblog-review"
+};
+
+const normalizedUnknown = normalizeScore(unknownScaleExample.score, unknownScaleExample.scale, targetScoreScale);
+if (normalizedUnknown === null) {
+    console.log(`- ${unknownScaleExample.publication}: Original ${unknownScaleExample.score} ${unknownScaleExample.scale} -> Could not normalize (invalid scale or score)`);
+}
+*/
+/**
+ * Calculates a weighted average Critics Score from an array of critic reviews,
+ * normalizing each score to a 0-100 scale.
+ * Assumes normalizeScore function is available globally.
+ *
+ * @param {Array<Object>} criticReviews An array of critic review objects.
+ * Each object should have:
+ * - publication (string)
+ * - score (number)
+ * - scale (string, e.g., 'out of 10', 'out of 5 stars', 'percent')
+ * - link (string)
+ * @returns {number|null} The weighted average Critics Score (0-100), or null if no valid reviews.
+ */
+ function calculateCriticsScore(criticReviews) {
+  const weights = {
+    "CNET": 1.2,
+    "TechRadar": 1.1,
+    "The Verge": 1.1,
+    "PCMag": 1.0,
+    "Engadget": 1.0,
+    "Ars Technica": 0.9,
+    "Tom's Guide": 0.9,
+    "Wired": 0.8,
+    "RTINGS.com": 1.2,
+    "FlatpanelsHD": 1.1,
+    "What Hi-Fi?": 1.0,
+    "Digital Trends": 0.9,
+    "default": 0.7 // Default weight for any other publication
+  };
+
+  let totalWeightedScore = 0;
+  let totalWeight = 0;
+
+  criticReviews.forEach(review => {
+    const normalizedScore = normalizeScore(review.score, review.scale, 100);
+
+    if (normalizedScore !== null) {
+      const publicationWeight = weights[review.publication] || weights.default;
+      totalWeightedScore += normalizedScore * publicationWeight;
+      totalWeight += publicationWeight;
+    }
+  });
+
+  if (totalWeight === 0) {
+    return null; // No valid reviews to calculate a score
+  }
+
+  return totalWeightedScore / totalWeight;
+}
+
+/*
+// --- Example Usage ---
+
+// Assume normalizeScore function is defined as in the previous response:
+/**
+ * Normalizes a numerical score from its original scale to a target scale using Min-Max normalization.
+ * @param {number} score The numerical score to normalize.
+ * @param {string} scale A string describing the original scale (e.g., 'out of 10', 'out of 5 stars', 'percent').
+ * @param {number} targetScale The desired maximum value of the normalized score (e.g., 100 for a 0-100 scale).
+ * @returns {number|null} The normalized score, or null if the scale is unknown or invalid.
+ */
+
+// Sample criticReviews data for demonstration:
+const sampleCriticReviews = [
+  {
+    "publication": "The Verge",
+    "score": 8.5,
+    "scale": "out of 10",
+    "link": "https://example.com/theverge-iphone16"
+  },
+  {
+    "publication": "PCMag",
+    "score": 4.0,
+    "scale": "out of 5 stars",
+    "link": "https://example.com/pcmag-iphone16"
+  },
+  {
+    "publication": "Engadget",
+    "score": 90, // Example of a 'percent' score (though not explicitly 'percent' in scale string in sample)
+    "scale": "percent", // Assuming 'percent' scale for Engadget if its score is 90
+    "link": "https://example.com/engadget-review"
+  },
+  {
+    "publication": "Random Blog", // Will use default weight
+    "score": 7.5,
+    "scale": "out of 10",
+    "link": "https://example.com/randomblog-review"
+  },
+  {
+    "publication": "CNET",
+    "score": 9.5,
+    "scale": "out of 10",
+    "link": "https://example.com/cnet-review"
+  }
+];
+
+const criticsScore = calculateCriticsScore(sampleCriticReviews);
+
+if (criticsScore !== null) {
+  console.log(`\nCalculated Critics Score: ${criticsScore.toFixed(2)} / 100`);
+} else {
+  console.log("Could not calculate Critics Score: No valid reviews.");
+}
+*/
+
+function showProductDetail(product) {
+    const productListDiv = document.getElementById('product-list');
+    const productDetailDiv = document.getElementById('product-detail');
+
+    // Hide product list and show product detail
+    productListDiv.classList.add('hidden');
+    productDetailDiv.classList.remove('hidden');
+
+    // Populate product detail elements
+    document.getElementById('product-detail-image').src = product.imageURL;
+    document.getElementById('product-detail-image').alt = product.productName;
+    document.getElementById('product-detail-name').textContent = product.productName;
+    document.getElementById('product-detail-brand').textContent = product.brand;
+    document.getElementById('product-detail-category').textContent = product.category;
+
+    const criticsScore = calculateCriticsScore(product.criticReviews);
+    if (criticsScore !== null) {
+        document.getElementById('product-detail-critics-score').textContent = `${Math.round(criticsScore)}/100`;
+    } else {
+        document.getElementById('product-detail-critics-score').textContent = `N/A`;
+    }
+    document.getElementById('product-detail-audience-rating').textContent = product.audienceRating;
+
+    // Populate Key Specifications
+    const productDetailSpecs = document.getElementById('product-detail-key-specs');
+    productDetailSpecs.innerHTML = ''; // Clear existing <li>s
+    for (const key in product.keySpecs) {
+        if (product.keySpecs.hasOwnProperty(key)) {
+            const listItem = document.createElement('li');
+            // Format key for display (e.g., "screenSize" -> "Screen Size")
+            // Your HTML for key-specs list items was `<li>**Display:** 6.7-inch Super Retina XDR ProMotion</li>`
+            const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()); // This formatting is good.
+            listItem.textContent = `${formattedKey}: ${product.keySpecs[key]}`;
+            productDetailSpecs.appendChild(listItem);
+        }
+    }
+
+    // Populate AI Pros
+    const productDetailPros = document.getElementById('product-detail-pros');
+    productDetailPros.innerHTML = ''; // Clear existing <li>s
+    product.aiProsCons.pros.forEach(pro => {
+        const listItem = document.createElement('li');
+        listItem.textContent = pro;
+        productDetailPros.appendChild(listItem);
+    });
+
+    // Populate AI Cons
+    const productDetailCons = document.getElementById('product-detail-cons');
+    productDetailCons.innerHTML = ''; // Clear existing <li>s
+    product.aiProsCons.cons.forEach(con => {
+        const listItem = document.createElement('li');
+        listItem.textContent = con;
+        productDetailCons.appendChild(listItem);
+    });
+
+    // Reset Pros/Cons Toggle state
+    const prosConsContent = document.getElementById('pros-cons-content');
+    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
+    
+    if (prosConsContent) {
+        prosConsContent.classList.add('hidden'); // Ensure hidden
+    }
+    if (prosConsToggleButton) {
+        // This assumes pros-cons-toggle-btn is a button whose text should change.
+        prosConsToggleButton.textContent = 'Show Pros & Cons'; // Reset button text
+    }
+}
+
+// Initial setup when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Assuming productsData is defined globally in your HTML
+    displayProducts(productsData);
+
+    // Event listener for 'Back to Products' button (attached once)
+    const backButton = document.getElementById('back-to-products-btn');
+    if (backButton) {
+        backButton.addEventListener('click', () => {
+            document.getElementById('product-detail').classList.add('hidden');
+            document.getElementById('product-list').classList.remove('hidden');
+        });
+    }
+
+    // Event listener for Pros/Cons Toggle button (attached once)
+    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
+    const prosConsContent = document.getElementById('pros-cons-content');
+
+    if (prosConsToggleButton && prosConsContent) {
+        prosConsToggleButton.addEventListener('click', () => {
+            prosConsContent.classList.toggle('hidden');
+            if (prosConsContent.classList.contains('hidden')) {
+                prosConsToggleButton.textContent = 'Show Pros & Cons';
+            } else {
+                prosConsToggleButton.textContent = 'Hide Pros & Cons';
+            }
+        });
+    }
+    // The user mentioned they will build out ai-pros-list stuff later, so no changes needed for that part yet.
+});
     </script>
 
 </body>
