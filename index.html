@@ -5,42 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechScore: Consolidated Tech Reviews</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 font-sans antialiased">
+    <style>
+        /* Custom styles for a more modern, blended look */
+        .hero-bg-image {
+            background-image: url('https://source.unsplash.com/1600x900/?tech,abstract-tech,circuit'); /* Dynamic tech-themed background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Optional: Add a subtle overlay for text readability if needed */
+            /* background-blend-mode: overlay; */
+            /* background-color: rgba(255, 255, 255, 0.1); */
+        }
 
-    <header class="bg-white shadow-md p-4">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">TechScore</h1>
+        /* Seamless header blending (adjust padding/margin as needed for exact blend) */
+        /* For a true blend, the header might have a transparent or semi-transparent background */
+        header {
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            backdrop-filter: blur(5px); /* Modern frosted glass effect */
+            -webkit-backdrop-filter: blur(5px); /* Safari support */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased text-gray-800">
+
+    <header class="fixed w-full top-0 left-0 z-50 p-4 transition-all duration-300 ease-in-out">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-200 cursor-pointer">TechScore</h1>
             <nav>
-                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-gray-600">
-                    <li><a href="#" class="hover:text-blue-600">Home</a></li>
-                    <li><a href="#" class="hover:text-blue-600">Products</a></li>
-                    <li><a href="#" class="hover:text-blue-600">About</a></li>
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-lg font-medium text-gray-700">
+                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">Home</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">Products</a></li>
+                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">About</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container mx-auto p-4">
-        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Product Name 1</h3>
-                <p class="text-gray-600">A brief description of Product 1, highlighting its key features and benefits.</p>
-                <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">View Details</button>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Product Name 2</h3>
-                <p class="text-gray-600">A brief description of Product 2, highlighting its key features and benefits.</p>
-                <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">View Details</button>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Product Name 3</h3>
-                <p class="text-gray-600">A brief description of Product 3, highlighting its key features and benefits.</p>
-                <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">View Details</button>
-            </div>
-        </div>
+    <main>
+        <section class="hero-bg-image relative flex items-center justify-center min-h-screen py-24 text-center px-4 overflow-hidden">
+            <div class="absolute inset-0 bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm"></div>
 
-        <div id="product-detail" class="hidden mt-8 p-6 bg-white rounded-lg shadow-lg">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-900 drop-shadow-lg animate-fade-in-up">
+                    <span class="block">Unbox Tomorrow, Today.</span>
+                    <span class="block text-blue-600 mt-2">Your Definitive Tech Insights.</span>
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto animate-fade-in">
+                    From cutting-edge gadgets to essential software, TechScore provides unbiased, in-depth reviews and comparisons. Make smarter choices with us.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in delay-200">
+                    <input
+                        type="search"
+                        placeholder="Search for a gadget, brand, or category..."
+                        class="w-full sm:w-96 p-4 pr-12 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-gray-700 placeholder-gray-400"
+                    />
+                    <button
+                        class="flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 active:scale-95"
+                    >
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto p-8 pt-20"> <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Featured Reviews</h2>
+            <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Next-Gen Smartphone X</h3>
+                    <p class="text-gray-600 text-sm mb-4">A deep dive into the latest smartphone with groundbreaking camera technology and AI features.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>Rating: <span class="font-bold text-blue-600">9.2/10</span></span>
+                        <span>Category: Mobile</span>
+                    </div>
+                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Ultra-Light Laptop Pro</h3>
+                    <p class="text-gray-600 text-sm mb-4">Experience unparalleled portability and power with this new contender in the laptop market.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>Rating: <span class="font-bold text-green-600">8.9/10</span></span>
+                        <span>Category: Laptops</span>
+                    </div>
+                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-103 transition-transform duration-300 cursor-pointer border border-gray-100 hover:border-blue-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Smart Home Hub v3</h3>
+                    <p class="text-gray-600 text-sm mb-4">Centralize your smart home with this intuitive and secure new generation hub.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span>Rating: <span class="font-bold text-purple-600">9.5/10</span></span>
+                        <span>Category: Smart Home</span>
+                    </div>
+                    <button class="w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium">Read Full Review</button>
+                </div>
+            </div>
+        </section>
+
+
+        <div id="product-detail" class="hidden mt-8 p-6 bg-white rounded-lg shadow-lg container mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Product Detail Page</h2>
             <p class="text-gray-700 mb-4">This section will display detailed information about a single product, including its specifications, reviews, and images.</p>
             <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400" onclick="document.getElementById('product-detail').classList.add('hidden'); document.getElementById('product-list').classList.remove('hidden');">Back to Products</button>
@@ -60,6 +123,19 @@
         //     document.getElementById('product-detail').classList.add('hidden');
         //     document.getElementById('product-list').classList.remove('hidden');
         // }
+
+        // Optional: Smooth scroll for fixed header (if desired for navigation)
+        // document.querySelectorAll('nav a').forEach(anchor => {
+        //     anchor.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         const targetId = this.getAttribute('href').substring(1);
+        //         if (targetId) { // Only scroll if there's a target ID
+        //             document.getElementById(targetId).scrollIntoView({
+        //                 behavior: 'smooth'
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 
 </body>
