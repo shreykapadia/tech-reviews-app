@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles moved from index.html */
+
+.hero-bg-image {
+    background-image: url('https://t4.ftcdn.net/jpg/04/14/22/55/360_F_414225555_k4FE9n2fjaBen0QlOW1kSjaQBWfjfCjF.jpg'); /* Dynamic tech-themed background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Optional: Add a subtle overlay for text readability if needed */
+    /* background-blend-mode: overlay; */
+    /* background-color: rgba(255, 255, 255, 0.1); */
+}
+
+/* Seamless header blending (adjust padding/margin as needed for exact blend) */
+header {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    backdrop-filter: blur(5px); /* Modern frosted glass effect */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+}
+
+/* Custom animation keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.delay-200 { animation-delay: 0.2s; } /* Example for staggered animation */
+
+/* Specific score badge styling for product cards */
+.score-badge {
+    @apply inline-flex items-center justify-center font-bold text-sm py-1 px-2.5 rounded-full whitespace-nowrap;
+}
+
+.score-good {
+    background-color: #d1fae5; /* bg-green-100 */
+    color: #059669; /* text-green-700 */
+}
+.score-avg {
+    background-color: #fee2e2; /* bg-red-100 */
+    color: #ef4444; /* text-red-500 */
+}
+.score-excellent {
+    background-color: #dbeafe; /* bg-blue-100 */
+    color: #2563eb; /* text-blue-600 */
+}
+
+/* Larger score badge for detail page */
+/* This class is intended to be used WITH .score-badge to override size and padding */
+.score-badge-lg {
+    @apply text-lg py-2 px-4; /* text-lg, padding-top/bottom: 0.5rem, padding-left/right: 1rem */
+}
+
+/* Custom styling for details/summary (collapsible section) */
+details summary {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 0.75rem; /* rounded-xl */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    font-weight: 600; /* font-semibold */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+}
+
+details summary:hover {
+    background-color: #e5e7eb; /* bg-gray-200 */
+}
+
+details[open] summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+details summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.2s ease-in-out;
+}
+
+details[open] summary::after {
+    content: '-';
+    transform: rotate(0deg); /* No rotation needed for '-' */
+}
+
+details .content {
+    padding: 1rem;
+    background-color: #ffffff; /* bg-white */
+    border: 1px solid #e5e7eb; /* border-gray-200 */
+    border-top: none;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+}
+
+/* Add any other custom CSS here */
+
+/* Example of adding a custom utility */
+/*
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+*/

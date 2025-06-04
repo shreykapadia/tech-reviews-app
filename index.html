@@ -4,159 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechScore: Consolidated Tech Reviews</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Custom styles for a more modern, blended look */
-        .hero-bg-image {
-            background-image: url('https://t4.ftcdn.net/jpg/04/14/22/55/360_F_414225555_k4FE9n2fjaBen0QlOW1kSjaQBWfjfCjF.jpg'); /* Dynamic tech-themed background */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            /* Optional: Add a subtle overlay for text readability if needed */
-            /* background-blend-mode: overlay; */ */
-            /* background-color: rgba(255, 255, 255, 0.1); */
-        }
-
-        /* Seamless header blending (adjust padding/margin as needed for exact blend) */
-        header {
-            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
-            backdrop-filter: blur(5px); /* Modern frosted glass effect */
-            -webkit-backdrop-filter: blur(5px); /* Safari support */
-        }
-
-        /* Custom animation keyframes */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-        .delay-200 { animation-delay: 0.2s; } /* Example for staggered animation */
-
-        /* Specific score badge styling for product cards */
-        .score-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.875rem; /* text-sm */
-            padding: 0.25rem 0.625rem; /* py-1 px-2.5, slightly adjusted for oval */
-            border-radius: 9999px; /* full rounded */
-            white-space: nowrap;
-        }
-
-        .score-good {
-            background-color: #d1fae5; /* bg-green-100 */
-            color: #059669; /* text-green-700 */
-        }
-        .score-avg {
-            background-color: #fee2e2; /* bg-red-100 */
-            color: #ef4444; /* text-red-500 */
-        }
-        .score-excellent {
-            background-color: #dbeafe; /* bg-blue-100 */
-            color: #2563eb; /* text-blue-600 */
-        }
-         /* Custom styles for consistency with the overall design language */
-         body {
-            background-color: #f9fafb; /* bg-gray-50 */
-            font-family: sans-serif; /* font-sans */
-            color: #374151; /* text-gray-800 */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Specific score badge styling for product cards and detail page */
-        .score-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.875rem; /* text-sm */
-            padding: 0.25rem 0.625rem; /* py-1 px-2.5, slightly adjusted for oval */
-            border-radius: 9999px; /* full rounded */
-            white-space: nowrap;
-        }
-
-        .score-good {
-            background-color: #d1fae5; /* bg-green-100 */
-            color: #059669; /* text-green-700 */
-        }
-        .score-avg {
-            background-color: #fee2e2; /* bg-red-100 */
-            color: #ef4444; /* text-red-500 */
-        }
-        .score-excellent {
-            background-color: #dbeafe; /* bg-blue-100 */
-            color: #2563eb; /* text-blue-600 */
-        }
-
-        /* Larger score badge for detail page */
-        .score-badge-lg {
-            font-size: 1.125rem; /* text-lg */
-            padding: 0.5rem 1rem;
-        }
-
-        /* Custom styling for details/summary (collapsible section) */
-        details summary {
-            cursor: pointer;
-            padding: 1rem;
-            border-radius: 0.75rem; /* rounded-xl */
-            background-color: #f3f4f6; /* bg-gray-100 */
-            font-weight: 600; /* font-semibold */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background-color 0.2s ease-in-out;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
-        }
-
-        details summary:hover {
-            background-color: #e5e7eb; /* bg-gray-200 */
-        }
-
-        details[open] summary {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        details summary::after {
-            content: '+';
-            font-size: 1.5rem;
-            line-height: 1;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        details[open] summary::after {
-            content: '-';
-            transform: rotate(0deg); /* No rotation needed for '-' */
-        }
-
-        details .content {
-            padding: 1rem;
-            background-color: #ffffff; /* bg-white */
-            border: 1px solid #e5e7eb; /* border-gray-200 */
-            border-top: none;
-            border-bottom-left-radius: 0.75rem;
-            border-bottom-right-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/output.css">
 </head>
-<body class="bg-gray-50 font-sans antialiased text-gray-800">
+<body class="bg-brand-light-gray font-sans antialiased text-brand-text">
 
     <header class="fixed w-full top-0 left-0 z-50 p-4 transition-all duration-300 ease-in-out">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-            <h1 class="text-3xl font-extrabold text-gray-900 mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-200 cursor-pointer">TechScore</h1>
+            <h1 class="text-3xl font-extrabold text-brand-primary mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-200 cursor-pointer font-serif">TechScore</h1>
             <nav>
-                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-lg font-medium text-gray-700">
-                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">Home</a></li>
-                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">Products</a></li>
-                    <li><a href="#" class="hover:text-blue-600 transition-colors duration-200">About</a></li>
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-lg font-medium text-brand-text">
+                    <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Home</a></li>
+                    <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Products</a></li>
+                    <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">About</a></li>
                 </ul>
             </nav>
         </div>
@@ -167,25 +29,23 @@
             <div class="absolute inset-0 bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm"></div>
 
             <div class="relative z-10 max-w-4xl mx-auto">
-                <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-900 drop-shadow-lg animate-fade-in-up">
+                <h2 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-brand-text drop-shadow-lg animate-fade-in-up font-serif">
                     <span class="block">Unbox Tomorrow, Today.</span>
-                    <span class="block text-blue-600 mt-2">Your Definitive Tech Insights.</span>
+                    <span class="block text-brand-primary mt-2">Your Definitive Tech Insights.</span>
                 </h2>
-                <p class="text-xl md:text-2xl text-gray-700 mb-10 leading-relaxed max-w-3xl mx-auto animate-fade-in">
+                <p class="text-xl md:text-2xl text-brand-text mb-10 leading-relaxed max-w-3xl mx-auto animate-fade-in">
                     From cutting-edge gadgets to essential software, TechScore provides unbiased, in-depth reviews and comparisons. Make smarter choices with us.
                 </p>
-
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in delay-200">
                     <input
-                        type="search"
-                        placeholder="Search for a gadget, brand, or category..."
+                        type="email"
+                        placeholder="email@example.com"
                         class="w-full sm:w-96 p-4 pr-12 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-gray-700 placeholder-gray-400"
-                    />
+                    /> <!-- Consider using brand colors for focus rings in tailwind.config.js later -->
                     <button
                         class="flex items-center justify-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 active:scale-95"
                     >
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        Search
+                        Sign up for updates
                     </button>
                 </div>
             </div>
@@ -198,7 +58,7 @@
                 <!-- Search Input -->
                 <div class="w-full sm:w-auto sm:flex-grow relative">
                     <input type="search" id="search-input" placeholder="Search products by name or brand..." 
-                           class="w-full p-4 pr-12 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-gray-700 placeholder-gray-400">
+                           class="w-full p-4 pr-12 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-brand-text placeholder-gray-400">
                     <!-- Optional: Search Icon if you want it inside the input -->
                     <!-- <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -207,7 +67,7 @@
                 <!-- Category Filter Dropdown -->
                 <div class="w-full sm:w-auto sm:min-w-[200px]"> <!-- Adjust min-width as needed -->
                     <select id="category-filter" 
-                            class="w-full p-4 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-gray-700 bg-white appearance-none">
+                            class="w-full p-4 text-lg rounded-full border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 transition-all duration-300 shadow-md text-brand-text bg-white appearance-none">
                         <option value="all">All Categories</option>
                         <option value="Smartphone">Smartphones</option>
                         <option value="Laptop">Laptops</option>
@@ -219,7 +79,7 @@
         </div>
 
         <section class="container mx-auto p-8 pt-20">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Featured Reviews</h2>
+            <h2 class="text-3xl font-bold text-brand-primary mb-8 text-center font-serif">Featured Reviews</h2>
             <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Dynamic product cards will be inserted here by JavaScript -->
             </div>
@@ -229,7 +89,7 @@
         <div id="product-detail" class="hidden mt-8 p-6 bg-white rounded-lg shadow-lg container mx-auto">
             <div class="bg-white rounded-xl shadow-lg p-8 relative">
                 <!-- Back to Products Button -->
-                <button id="back-to-products-btn" class="absolute top-4 right-4 px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors duration-200 text-sm font-medium">
+                <button id="back-to-products-btn" class="absolute top-4 right-4 px-4 py-2 bg-brand-light-gray text-brand-text rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors duration-200 text-sm font-medium">
                     &larr; Back to Products
                 </button>
         
@@ -246,34 +106,34 @@
         
                     <!-- Right Column: Product Details, Scores, Specs, Pros & Cons -->
                     <div class="md:w-1/2 flex flex-col">
-                        <!-- Product Name, Brand, Category -->
-                        <h2 id="product-detail-name" class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2 leading-tight">
+                        <!-- Product Name, Brand, Category -->_
+                        <h2 id="product-detail-name" class="text-4xl md:text-5xl font-extrabold text-brand-primary mb-2 leading-tight font-serif">
                             iPhone 16 Pro Max
                         </h2>
-                        <p class="text-lg text-gray-600 mb-2">Brand: <span id="product-detail-brand" class="font-semibold text-gray-800">Apple</span></p>
-                        <p class="text-lg text-gray-600 mb-6">Category: <span id="product-detail-category" class="font-semibold text-gray-800">Smartphones</span></p>
+                        <p class="text-lg text-brand-text mb-2">Brand: <span id="product-detail-brand" class="font-semibold text-brand-text">Apple</span></p>
+                        <p class="text-lg text-brand-text mb-6">Category: <span id="product-detail-category" class="font-semibold text-brand-text">Smartphones</span></p>
         
                         <!-- Critics Score & Audience Rating -->
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-y-4 sm:gap-x-8 mb-8">
                             <!-- Critics Score -->
                             <div class="flex items-center space-x-3">
-                                <span id="product-detail-critics-score" class="score-badge score-excellent score-badge-lg">
+                                <span id="product-detail-critics-score" class="score-badge score-excellent score-badge-lg"> <!-- score-excellent uses custom colors -->
                                     93/100
                                 </span>
-                                <span class="text-lg font-semibold text-gray-700">Critics Score</span>
+                                <span class="text-lg font-semibold text-brand-text">Critics Score</span>
                             </div>
         
                             <!-- Audience Rating -->
                             <div class="flex items-center space-x-3">
                                 <span class="text-3xl text-yellow-500">&#9733;</span> <!-- Larger Unicode star -->
-                                <span id="product-detail-audience-rating" class="text-lg font-semibold text-gray-700">4.9/5 Audience Rating</span>
+                                <span id="product-detail-audience-rating" class="text-lg font-semibold text-brand-text">4.9/5 Audience Rating</span>
                             </div>
                         </div>
         
                         <!-- Key Specifications -->
-                        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-100">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Key Specifications</h3>
-                            <ul id="product-detail-key-specs" class="list-disc list-inside space-y-2 text-gray-700">
+                        <div class="mb-8 p-6 bg-brand-light-gray rounded-lg shadow-sm border border-gray-100">
+                            <h3 class="text-2xl font-bold text-brand-text mb-4 font-serif">Key Specifications</h3>
+                            <ul id="product-detail-key-specs" class="list-disc list-inside space-y-2 text-brand-text">
                                 <li>**Display:** 6.7-inch Super Retina XDR ProMotion</li>
                                 <li>**Processor:** A18 Bionic Chip</li>
                                 <li>**RAM:** 12GB</li>
@@ -289,20 +149,20 @@
                             <!-- <button  class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full text-sm mb-4">
                                 Show Pros & Cons
                             </button> -->
-                            <summary id="pros-cons-toggle-btn" class="text-lg text-gray-800">
+                            <summary id="pros-cons-toggle-btn" class="text-lg text-brand-text font-serif">
                                 AI-Generated Pros & Cons Summary
                             </summary>
                             <div id="pros-cons-content" class="content">
-                                <h4 class="text-xl font-semibold text-gray-800 mb-3">Pros:</h4>
-                                <ul id="product-detail-pros" class="list-disc list-inside space-y-1 text-gray-700 mb-4">
+                                <h4 class="text-xl font-semibold text-brand-text mb-3">Pros:</h4>
+                                <ul id="product-detail-pros" class="list-disc list-inside space-y-1 text-brand-text mb-4">
                                     <li>Unrivaled performance with A18 Bionic.</li>
                                     <li>Stunning display with adaptive refresh rate.</li>
                                     <li>Exceptional camera capabilities, especially in low light.</li>
                                     <li>Robust build quality and premium materials.</li>
                                     <li>Seamless integration within the Apple ecosystem.</li>
                                 </ul>
-                                <h4 class="text-xl font-semibold text-gray-800 mb-3">Cons:</h4>
-                                <ul id="product-detail-cons" class="list-disc list-inside space-y-1 text-gray-700">
+                                <h4 class="text-xl font-semibold text-brand-text mb-3">Cons:</h4>
+                                <ul id="product-detail-cons" class="list-disc list-inside space-y-1 text-brand-text">
                                     <li>Premium price point.</li>
                                     <li>Limited customization options compared to Android.</li>
                                     <li>Fast charging still lags behind some competitors.</li>
@@ -317,903 +177,7 @@
         </div>
     </main>
 
-    <script>
-        
-        // Your JavaScript logic will go here.
-        // For example, to switch between product list and product detail:
-
-        // function showProductDetail() {
-        //     document.getElementById('product-list').classList.add('hidden');
-        //     document.getElementById('product-detail').classList.remove('hidden');
-        // }
-
-        // function showProductList() {
-        //     document.getElementById('product-detail').classList.add('hidden');
-        //     document.getElementById('product-list').classList.remove('hidden');
-        // }
-
-        // Optional: Smooth scroll for fixed header (if desired for navigation)
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                if (targetId) { // Only scroll if there's a target ID
-                    document.getElementById(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        const productsData = [
-  {
-    "productName": "iPhone 16 Pro",
-    "brand": "Apple",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=iPhone16Pro",
-    "keySpecs": {
-      "screenSize": "6.3\" ProMotion OLED",
-      "processor": "A18 Pro Chip",
-      "ram": "8GB RAM",
-      "storage": "256GB Storage",
-      "camera": "48MP Main Camera",
-      "battery": "All-Day Battery"
-    },
-    "criticReviews": [
-      {
-        "publication": "CNET",
-        "score": 8.9,
-        "scale": "out of 10",
-        "link": "https://example.com/cnet-iphone16pro"
-      },
-      {
-        "publication": "TechRadar",
-        "score": 4.5,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/techradar-iphone16pro"
-      }
-    ],
-    "audienceRating": "4.7/5",
-    "aiProsCons": {
-      "pros": [
-        "Advanced camera",
-        "powerful chip",
-        "durable design"
-      ],
-      "cons": [
-        "High price",
-        "incremental updates"
-      ]
-    }
-  },
-  {
-    "productName": "iPhone 16",
-    "brand": "Apple",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=iPhone16",
-    "keySpecs": {
-      "screenSize": "6.1\" Super Retina XDR",
-      "processor": "A18 Chip",
-      "ram": "6GB RAM",
-      "storage": "128GB Storage",
-      "camera": "48MP Main Camera",
-      "battery": "Improved Battery Life"
-    },
-    "criticReviews": [
-      {
-        "publication": "The Verge",
-        "score": 8.5,
-        "scale": "out of 10",
-        "link": "https://example.com/theverge-iphone16"
-      },
-      {
-        "publication": "PCMag",
-        "score": 4.0,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/pcmag-iphone16"
-      }
-    ],
-    "audienceRating": "4.5/5",
-    "aiProsCons": {
-      "pros": [
-        "Great display",
-        "solid performance",
-        "good battery"
-      ],
-      "cons": [
-        "Still uses Lightning",
-        "no ProMotion"
-      ]
-    }
-  },
-  {
-    "productName": "Google Pixel 9 Pro",
-    "brand": "Google",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Pixel9Pro",
-    "keySpecs": {
-      "screenSize": "6.7\" LTPO OLED",
-      "processor": "Tensor G4 Chip",
-      "ram": "12GB RAM",
-      "storage": "256GB Storage",
-      "camera": "Advanced AI Camera",
-      "battery": "Long Battery Life"
-    },
-    "criticReviews": [
-      {
-        "publication": "Engadget",
-        "score": 90,
-        "scale": "percent",
-        "link": "https://example.com/engadget-pixel9pro"
-      },
-      {
-        "publication": "Ars Technica",
-        "score": 8.8,
-        "scale": "out of 10",
-        "link": "https://example.com/arstechnica-pixel9pro"
-      }
-    ],
-    "audienceRating": "4.6/5",
-    "aiProsCons": {
-      "pros": [
-        "Exceptional camera",
-        "clean Android",
-        "strong AI features"
-      ],
-      "cons": [
-        "Tensor G4 heating",
-        "limited availability"
-      ]
-    }
-  },
-  {
-    "productName": "Google Pixel 9",
-    "brand": "Google",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Pixel9",
-    "keySpecs": {
-      "screenSize": "6.2\" OLED",
-      "processor": "Tensor G4 Chip",
-      "ram": "8GB RAM",
-      "storage": "128GB Storage",
-      "camera": "Dual Camera",
-      "design": "Compact Design"
-    },
-    "criticReviews": [
-      {
-        "publication": "Tom's Guide",
-        "score": 4.0,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/tomsguide-pixel9"
-      },
-      {
-        "publication": "Wired",
-        "score": 8.2,
-        "scale": "out of 10",
-        "link": "https://example.com/wired-pixel9"
-      }
-    ],
-    "audienceRating": "4.4/5",
-    "aiProsCons": {
-      "pros": [
-        "Excellent value",
-        "great software experience",
-        "good camera"
-      ],
-      "cons": [
-        "Battery life could be better",
-        "slower charging"
-      ]
-    }
-  },
-  {
-    "productName": "Samsung Galaxy S25 Ultra",
-    "brand": "Samsung",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S25Ultra",
-    "keySpecs": {
-      "screenSize": "6.8\" Dynamic AMOLED 2X",
-      "processor": "Snapdragon 8 Gen 4",
-      "ram": "12GB RAM",
-      "storage": "512GB Storage",
-      "camera": "200MP Camera",
-      "features": "S Pen"
-    },
-    "criticReviews": [
-      {
-        "publication": "CNET",
-        "score": 9.1,
-        "scale": "out of 10",
-        "link": "https://example.com/cnet-s25ultra"
-      },
-      {
-        "publication": "TechRadar",
-        "score": 5.0,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/techradar-s25ultra"
-      }
-    ],
-    "audienceRating": "4.8/5",
-    "aiProsCons": {
-      "pros": [
-        "Best-in-class display",
-        "versatile camera",
-        "S Pen integration"
-      ],
-      "cons": [
-        "Very expensive",
-        "bulky design"
-      ]
-    }
-  },
-  {
-    "productName": "Samsung Galaxy S25",
-    "brand": "Samsung",
-    "category": "Smartphone",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S25",
-    "keySpecs": {
-      "screenSize": "6.2\" Dynamic AMOLED 2X",
-      "processor": "Snapdragon 8 Gen 4",
-      "ram": "8GB RAM",
-      "storage": "128GB Storage",
-      "camera": "Triple Camera",
-      "design": "Sleek Design"
-    },
-    "criticReviews": [
-      {
-        "publication": "The Verge",
-        "score": 8.7,
-        "scale": "out of 10",
-        "link": "https://example.com/theverge-s25"
-      },
-      {
-        "publication": "PCMag",
-        "score": 4.2,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/pcmag-s25"
-      }
-    ],
-    "audienceRating": "4.6/5",
-    "aiProsCons": {
-      "pros": [
-        "Vibrant screen",
-        "powerful processor",
-        "good camera system"
-      ],
-      "cons": [
-        "Battery life average",
-        "design similar to previous"
-      ]
-    }
-  },
-  {
-    "productName": "MacBook Air M4 (13-inch)",
-    "brand": "Apple",
-    "category": "Laptop",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=MBAirM4",
-    "keySpecs": {
-      "screenSize": "13.6\" Liquid Retina",
-      "processor": "M4 Chip",
-      "memory": "8GB Unified Memory",
-      "storage": "256GB SSD",
-      "cooling": "Fanless Design",
-      "battery": "Up to 18 hrs battery"
-    },
-    "criticReviews": [
-      {
-        "publication": "CNET",
-        "score": 9.0,
-        "scale": "out of 10",
-        "link": "https://example.com/cnet-mbairm4"
-      },
-      {
-        "publication": "TechRadar",
-        "score": 4.5,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/techradar-mbairm4"
-      }
-    ],
-    "audienceRating": "4.8/5",
-    "aiProsCons": {
-      "pros": [
-        "Incredible performance",
-        "silent operation",
-        "amazing battery life"
-      ],
-      "cons": [
-        "Limited ports",
-        "no active cooling"
-      ]
-    }
-  },
-  {
-    "productName": "MacBook Pro M4 (14-inch)",
-    "brand": "Apple",
-    "category": "Laptop",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=MBProM4",
-    "keySpecs": {
-      "screenSize": "14.2\" Liquid Retina XDR",
-      "processor": "M4 Pro Chip",
-      "memory": "18GB Unified Memory",
-      "storage": "512GB SSD",
-      "displayTech": "ProMotion",
-      "battery": "Up to 22 hrs battery"
-    },
-    "criticReviews": [
-      {
-        "publication": "The Verge",
-        "score": 9.2,
-        "scale": "out of 10",
-        "link": "https://example.com/theverge-mbprom4"
-      },
-      {
-        "publication": "PCMag",
-        "score": 4.8,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/pcmag-mbprom4"
-      }
-    ],
-    "audienceRating": "4.9/5",
-    "aiProsCons": {
-      "pros": [
-        "Unmatched performance",
-        "stunning display",
-        "long battery",
-        "great ports"
-      ],
-      "cons": [
-        "Very expensive",
-        "heavy for portability"
-      ]
-    }
-  },
-  {
-    "productName": "Surface Laptop 7 (13.5-inch)",
-    "brand": "Microsoft",
-    "category": "Laptop",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=SL7",
-    "keySpecs": {
-      "screenSize": "13.5\" PixelSense",
-      "processor": "Snapdragon X Elite",
-      "ram": "16GB RAM",
-      "storage": "512GB SSD",
-      "design": "Slim Design",
-      "battery": "All-Day Battery"
-    },
-    "criticReviews": [
-      {
-        "publication": "Engadget",
-        "score": 88,
-        "scale": "percent",
-        "link": "https://example.com/engadget-sl7"
-      },
-      {
-        "publication": "Ars Technica",
-        "score": 8.5,
-        "scale": "out of 10",
-        "link": "https://example.com/arstechnica-sl7"
-      }
-    ],
-    "audienceRating": "4.3/5",
-    "aiProsCons": {
-      "pros": [
-        "Sleek design",
-        "excellent keyboard",
-        "good performance for everyday"
-      ],
-      "cons": [
-        "Limited software compatibility",
-        "higher price than competitors"
-      ]
-    }
-  },
-  {
-    "productName": "Dell XPS 14",
-    "brand": "Dell",
-    "category": "Laptop",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=XPS14",
-    "keySpecs": {
-      "screenSize": "14.5\" OLED",
-      "processor": "Intel Core Ultra 7",
-      "ram": "16GB RAM",
-      "storage": "1TB SSD",
-      "graphics": "NVIDIA RTX 4060",
-      "build": "Premium Build"
-    },
-    "criticReviews": [
-      {
-        "publication": "Tom's Guide",
-        "score": 4.5,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/tomsguide-xps14"
-      },
-      {
-        "publication": "Wired",
-        "score": 8.9,
-        "scale": "out of 10",
-        "link": "https://example.com/wired-xps14"
-      }
-    ],
-    "audienceRating": "4.6/5",
-    "aiProsCons": {
-      "pros": [
-        "Stunning OLED display",
-        "powerful performance",
-        "premium design"
-      ],
-      "cons": [
-        "Expensive",
-        "battery life could be better"
-      ]
-    }
-  },
-  {
-    "productName": "HP Spectre x360 14",
-    "brand": "HP",
-    "category": "Laptop",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=Spectrex360",
-    "keySpecs": {
-      "screenSize": "14\" OLED Touch",
-      "processor": "Intel Core Ultra 7",
-      "ram": "16GB RAM",
-      "storage": "1TB SSD",
-      "design": "Convertible Design",
-      "battery": "Long Battery Life"
-    },
-    "criticReviews": [
-      {
-        "publication": "CNET",
-        "score": 8.7,
-        "scale": "out of 10",
-        "link": "https://example.com/cnet-hpspectre"
-      },
-      {
-        "publication": "TechRadar",
-        "score": 4.3,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/techradar-hpspectre"
-      }
-    ],
-    "audienceRating": "4.5/5",
-    "aiProsCons": {
-      "pros": [
-        "Gorgeous OLED",
-        "versatile 2-in-1",
-        "great audio"
-      ],
-      "cons": [
-        "Heavier than some rivals",
-        "stylus sold separately"
-      ]
-    }
-  },
-  {
-    "productName": "Samsung S95D OLED TV (65-inch)",
-    "brand": "Samsung",
-    "category": "TV",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=S95D",
-    "keySpecs": {
-      "screenSize": "65\" QD-OLED",
-      "resolution": "4K Resolution",
-      "refreshRate": "144Hz Refresh Rate",
-      "features": "Anti-Reflection Screen, Smart TV Features"
-    },
-    "criticReviews": [
-      {
-        "publication": "RTINGS.com",
-        "score": 9.3,
-        "scale": "out of 10",
-        "link": "https://example.com/rtings-s95d"
-      },
-      {
-        "publication": "FlatpanelsHD",
-        "score": 9.5,
-        "scale": "out of 10",
-        "link": "https://example.com/flatpanelshd-s95d"
-      }
-    ],
-    "audienceRating": "4.8/5",
-    "aiProsCons": {
-      "pros": [
-        "Unrivaled picture quality",
-        "vibrant colors",
-        "excellent gaming features"
-      ],
-      "cons": [
-        "High price",
-        "minor blooming in extreme dark scenes"
-      ]
-    }
-  },
-  {
-    "productName": "LG G4 OLED TV (65-inch)",
-    "brand": "LG",
-    "category": "TV",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=G4OLED",
-    "keySpecs": {
-      "screenSize": "65\" OLED evo",
-      "resolution": "4K Resolution",
-      "refreshRate": "120Hz Refresh Rate",
-      "features": "Brightness Booster Max, Gallery Design"
-    },
-    "criticReviews": [
-      {
-        "publication": "What Hi-Fi?",
-        "score": 5,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/whathifi-g4"
-      },
-      {
-        "publication": "TechRadar",
-        "score": 4.8,
-        "scale": "out of 5 stars",
-        "link": "https://example.com/techradar-g4"
-      }
-    ],
-    "audienceRating": "4.7/5",
-    "aiProsCons": {
-      "pros": [
-        "Stunning brightness",
-        "perfect blacks",
-        "great sound",
-        "sleek design"
-      ],
-      "cons": [
-        "Still expensive",
-        "minor motion artifacts in some content"
-      ]
-    }
-  },
-  {
-    "productName": "Sony BRAVIA A95L OLED TV (65-inch)",
-    "brand": "Sony",
-    "category": "TV",
-    "imageURL": "https://placehold.co/150x150/E0E0E0/1F2937?text=A95L",
-    "keySpecs": {
-      "screenSize": "65\" QD-OLED",
-      "resolution": "4K Resolution",
-      "processor": "Cognitive Processor XR",
-      "audio": "Acoustic Surface Audio+",
-      "smartTV": "Google TV"
-    },
-    "criticReviews": [
-      {
-        "publication": "Digital Trends",
-        "score": 9.0,
-        "scale": "out of 10",
-        "link": "https://example.com/digitaltrends-a95l"
-      },
-      {
-        "publication": "CNET",
-        "score": 9.2,
-        "scale": "out of 10",
-        "link": "https://example.com/cnet-a95l"
-      }
-    ],
-    "audienceRating": "4.9/5",
-    "aiProsCons": {
-      "pros": [
-        "Best-in-class image processing",
-        "immersive sound",
-        "excellent upscaling"
-      ],
-      "cons": [
-        "Fewer HDMI 2.1 ports",
-        "higher input lag than rivals"
-      ]
-    }
-  }
-];
-
-/**
- * Normalizes a numerical score from its original scale to a target scale using Min-Max normalization.
- *
- * @param {number} score The numerical score to normalize.
- * @param {string} scale A string describing the original scale (e.g., 'out of 10', 'out of 5 stars', 'percent').
- * @param {number} targetScale The desired maximum value of the normalized score (e.g., 100 for a 0-100 scale).
- * @returns {number|null} The normalized score, or null if the scale is unknown or invalid.
- */
- function normalizeScore(score, scale, targetScale) {
-  let originalMax;
-
-  // Determine the maximum value of the original scale
-  if (scale === 'out of 10') {
-    originalMax = 10;
-  } else if (scale === 'out of 5 stars') {
-    originalMax = 5;
-  } else if (scale === 'percent') {
-    originalMax = 100; // Score is already a percentage
-  } else {
-    // If the scale is unknown or invalid, return null
-    console.warn(`Unknown or invalid scale: ${scale}`);
-    return null;
-  }
-
-  // Handle cases where the score might be outside the assumed originalMax for 'percent'
-  // or if score is invalid
-  if (score === null || typeof score !== 'number' || isNaN(score)) {
-    return null;
-  }
-
-  // Min-Max normalization formula: ((score - min_original) / (max_original - min_original)) * (max_target - min_target) + min_target
-  // Assuming min_original = 0 and min_target = 0 for simplicity, common in rating normalization [cite: 2, 3]
-  // Formula simplifies to: (score / max_original) * targetScale
-  
-  if (originalMax === 0) { // Avoid division by zero
-    return null;
-  }
-
-  // For 'percent' scale, the score is already proportional to 100, so directly scale to targetScale
-  if (scale === 'percent') {
-      return (score / 100) * targetScale;
-  } else {
-      return (score / originalMax) * targetScale;
-  }
-}
-
-/**
- * Calculates a weighted average Critics Score from an array of critic reviews,
- * normalizing each score to a 0-100 scale.
- * Assumes normalizeScore function is available globally.
- *
- * @param {Array<Object>} criticReviews An array of critic review objects.
- * Each object should have:
- * - publication (string)
- * - score (number)
- * - scale (string, e.g., 'out of 10', 'out of 5 stars', 'percent')
- * - link (string)
- * @returns {number|null} The weighted average Critics Score (0-100), or null if no valid reviews.
- */
- function calculateCriticsScore(criticReviews) {
-  const weights = {
-    "CNET": 1.2,
-    "TechRadar": 1.1,
-    "The Verge": 1.1,
-    "PCMag": 1.0,
-    "Engadget": 1.0,
-    "Ars Technica": 0.9,
-    "Tom's Guide": 0.9,
-    "Wired": 0.8,
-    "RTINGS.com": 1.2,
-    "FlatpanelsHD": 1.1,
-    "What Hi-Fi?": 1.0,
-    "Digital Trends": 0.9,
-    "default": 0.7 // Default weight for any other publication
-  };
-
-  let totalWeightedScore = 0;
-  let totalWeight = 0;
-
-  criticReviews.forEach(review => {
-    const normalizedScore = normalizeScore(review.score, review.scale, 100);
-
-    if (normalizedScore !== null) {
-      const publicationWeight = weights[review.publication] || weights.default;
-      totalWeightedScore += normalizedScore * publicationWeight;
-      totalWeight += publicationWeight;
-    }
-  });
-
-  if (totalWeight === 0) {
-    return null; // No valid reviews to calculate a score
-  }
-
-  return totalWeightedScore / totalWeight;
-}
-
-function showProductDetail(product) {
-    const productListDiv = document.getElementById('product-list');
-    const productDetailDiv = document.getElementById('product-detail');
-
-    productListDiv.classList.add('hidden');
-    productDetailDiv.classList.remove('hidden');
-
-    // Populate product detail elements
-    document.getElementById('product-detail-image').src = product.imageURL;
-    document.getElementById('product-detail-image').alt = product.productName;
-    document.getElementById('product-detail-name').textContent = product.productName;
-    document.getElementById('product-detail-brand').textContent = product.brand;
-    document.getElementById('product-detail-category').textContent = product.category;
-
-    const criticsScore = calculateCriticsScore(product.criticReviews);
-    if (criticsScore !== null) {
-        document.getElementById('product-detail-critics-score').textContent = `${Math.round(criticsScore)}/100`;
-    } else {
-        document.getElementById('product-detail-critics-score').textContent = `N/A`;
-    }
-    document.getElementById('product-detail-audience-rating').textContent = product.audienceRating;
-
-    // Populate Key Specifications
-    const productDetailSpecs = document.getElementById('product-detail-key-specs');
-    productDetailSpecs.innerHTML = ''; // Clear existing <li>s
-    for (const key in product.keySpecs) {
-        if (product.keySpecs.hasOwnProperty(key)) {
-            const listItem = document.createElement('li');
-            const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-            listItem.textContent = `${formattedKey}: ${product.keySpecs[key]}`;
-            productDetailSpecs.appendChild(listItem);
-        }
-    }
-
-    // Populate AI Pros
-    const productDetailPros = document.getElementById('product-detail-pros');
-    productDetailPros.innerHTML = ''; // Clear existing <li>s
-    product.aiProsCons.pros.forEach(pro => {
-        const listItem = document.createElement('li');
-        listItem.textContent = pro;
-        productDetailPros.appendChild(listItem);
-    });
-
-    // Populate AI Cons
-    const productDetailCons = document.getElementById('product-detail-cons');
-    productDetailCons.innerHTML = ''; // Clear existing <li>s
-    product.aiProsCons.cons.forEach(con => {
-        const listItem = document.createElement('li');
-        listItem.textContent = con;
-        productDetailCons.appendChild(listItem);
-    });
-
-    // Reset Pros/Cons Toggle state
-    const prosConsContent = document.getElementById('pros-cons-content');
-    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn'); // This is the <summary> element
-    
-    // For <details>/<summary>, we don't directly control visibility with 'hidden' class on content
-    // and textContent of summary for show/hide. The <details> element handles this.
-    // We just need to ensure the <details> element is closed when a new product is shown.
-    const detailsElement = prosConsToggleButton.closest('details');
-    if (detailsElement) {
-        detailsElement.open = false; // Close the details section
-    }
-    // The text of the summary ("AI-Generated Pros & Cons Summary") should remain as is.
-    // The +/- indicator is handled by CSS on the summary::after.
-}
-
-function displayProducts(products) {
-  const productListDiv = document.getElementById('product-list');
-  console.log("displayProducts called."); // Debugging: Log function call
-  productListDiv.innerHTML = ''; // Clear existing content
-
-  if (!products || products.length === 0) {
-      console.log("displayProducts: No products data found or data is empty."); // Debugging: Log empty data
-      productListDiv.innerHTML = '<p class="text-center text-gray-600 col-span-full">No products found.</p>';
-      return; // Exit if no products
-  }
-
-
-  products.forEach(product => {
-    const criticsScore = calculateCriticsScore(product.criticReviews);
-    // Determine the score display and badge class
-    let scoreDisplay = 'N/A';
-    let scoreBadgeClass = 'score-avg'; // Default class if score is N/A
-
-    if (criticsScore !== null) {
-        const roundedScore = Math.round(criticsScore);
-        scoreDisplay = `${roundedScore}/100`;
-        if (roundedScore >= 85) {
-            scoreBadgeClass = 'score-excellent';
-        } else if (roundedScore >= 70) {
-            scoreBadgeClass = 'score-good';
-        } else {
-            scoreBadgeClass = 'score-avg';
-        }
-    }
-
-    try { // Debugging: Add try-catch around card creation
-    const productCard = document.createElement('div');
-    // Use classes that match the original static card structure for consistent styling
-    productCard.classList.add(
-        'block', // Ensure it behaves like the original <a> block
-        'bg-white', 'rounded-xl', 'shadow-lg', 'p-6',
-        'transform', 'hover:scale-103', 'transition-all', 'duration-300',
-        'border', 'border-gray-100', 'hover:border-blue-200',
-        'flex', 'flex-col', 'justify-between', 'cursor-pointer',
-        'overflow-hidden', 'group' // group class is needed for button opacity hover
-    );
-
-    productCard.innerHTML = `
-        <div>
-            <div class="flex justify-center mb-4 overflow-hidden rounded-lg">
-                <img src="${product.imageURL}" alt="${product.productName}" class="max-w-full h-auto rounded-lg object-cover transform group-hover:scale-110 transition-transform duration-300">
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-1 leading-tight">${product.productName}</h3>
-            <p class="text-sm text-gray-500 mb-4">Brand: <span class="font-semibold text-gray-600">${product.brand}</span></p>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-y-2 sm:gap-x-4 mb-4">
-                <div class="flex items-center space-x-2">
-                    <span class="score-badge ${scoreBadgeClass}">
-                        ${scoreDisplay}
-                    </span>
-                    <span class="text-sm font-medium text-gray-600">Critics Score</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span class="text-lg text-yellow-500">&#9733;</span>
-                    <span class="text-sm font-medium text-gray-600">${product.audienceRating} Audience Rating</span>
-                </div>
-            </div>
-        </div>
-        <!-- Re-add the View Details button for consistency -->
-        <button class="mt-4 w-full px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-base font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
-            View Details
-        </button>
-    `;
-
-    productCard.addEventListener('click', () => showProductDetail(product));
-    console.log(`displayProducts: Appending card for ${product.productName}`); // Debugging: Log append
-    productListDiv.appendChild(productCard);
-    } catch (error) { // Debugging: Catch errors during card creation
-        console.error(`displayProducts: Error creating or appending card for product ${product.productName || 'Unknown'}:`, error);
-    }
-  });
-  console.log("displayProducts finished."); // Debugging: Log function end
-}
-
-// Initial setup when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOMContentLoaded fired."); // Debugging: Log DOMContentLoaded
-    // Check if productsData is defined and not empty before displaying
-    if (typeof productsData !== 'undefined' && productsData && productsData.length > 0) {
-        console.log("DOMContentLoaded: productsData found, attempting to display products."); // Debugging: Log data found
-        displayProducts(productsData);
-    } else {
-        console.error("DOMContentLoaded: productsData is not defined or is empty."); // This log was already present
-        document.getElementById('product-list').innerHTML = '<p class="text-center text-gray-600 col-span-full">Could not load product data.</p>';
-    }
-
-    // Event listener for 'Back to Products' button (attached once)
-    const backButton = document.getElementById('back-to-products-btn');
-    if (backButton) {
-        backButton.addEventListener('click', () => {
-            document.getElementById('product-detail').classList.add('hidden');
-            document.getElementById('product-list').classList.remove('hidden');
-        });
-    }
-
-    // Event listener for Pros/Cons Toggle button (attached once)
-    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
-    const prosConsContent = document.getElementById('pros-cons-content');
-
-    if (prosConsToggleButton && prosConsContent) {
-        // The <summary> element with id="pros-cons-toggle-btn" naturally handles
-        // toggling the visibility of the content within the <details> tag.
-        // We don't need to manually toggle 'hidden' on prosConsContent or change text here.
-        // The CSS ::after pseudo-element handles the +/-.
-        // So, no specific JavaScript event listener is needed for the <summary> toggle itself.
-    }
-});
-// Get references to the HTML elements
-const searchInput = document.getElementById('search-input');
-const categoryFilter = document.getElementById('category-filter');
-
-// Function to apply filters
-function applyFilters() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-
-    const filteredProducts = productsData.filter(product => {
-        const matchesSearchTerm =
-            product.productName.toLowerCase().includes(searchTerm) ||
-            product.brand.toLowerCase().includes(searchTerm);
-
-        const matchesCategory =
-            selectedCategory === 'all' || product.category === selectedCategory;
-
-        return matchesSearchTerm && matchesCategory;
-    });
-
-    displayProducts(filteredProducts);
-}
-
-// Add event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    // Initial call to display products (already there from previous steps)
-    // displayProducts(productsData);
-
-    // Apply any default filters after initial display of all products
-    applyFilters();
-
-    // Event listeners for filter changes
-    searchInput.addEventListener('input', applyFilters);
-    categoryFilter.addEventListener('change', applyFilters);
-});
-    </script>
+    <script src="js/script.js" defer></script>
 
 </body>
 </html>
