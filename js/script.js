@@ -101,35 +101,35 @@ function showProductDetail(product) { // Replaced with version from index.html f
         }
     }
 
-    // const productDetailPros = document.getElementById('product-detail-pros');
-    // productDetailPros.innerHTML = '';
-    // // Safely access pros if aiProsCons and its 'pros' property exist
-    // if (product.aiProsCons && Array.isArray(product.aiProsCons.pros)) {
-    //     product.aiProsCons.pros.forEach(pro => {
-    //         const listItem = document.createElement('li');
-    //         listItem.textContent = pro;
-    //         productDetailPros.appendChild(listItem);
-    //     });
-    // }
+    const productDetailPros = document.getElementById('product-detail-pros');
+    productDetailPros.innerHTML = '';
+    // Safely access pros if aiProsCons and its 'pros' property exist
+    if (product.aiProsCons && Array.isArray(product.aiProsCons.pros)) {
+        product.aiProsCons.pros.forEach(pro => {
+            const listItem = document.createElement('li');
+            listItem.textContent = pro;
+            productDetailPros.appendChild(listItem);
+        });
+    }
 
-    // // const productDetailCons = document.getElementById('product-detail-cons');
-    // // productDetailCons.innerHTML = '';
-    // // // Safely access cons if aiProsCons and its 'cons' property exist
-    // // if (product.aiProsCons && Array.isArray(product.aiProsCons.cons)) {
-    // //     product.aiProsCons.cons.forEach(con => {
-    // //         const listItem = document.createElement('li');
-    // //         listItem.textContent = con;
-    // //         productDetailCons.appendChild(listItem);
-    // //     });
-    // // }
-    // const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
-    // // For <details>/<summary>, we ensure the <details> element is closed when a new product is shown.
-    // if (prosConsToggleButton) {
-    //     const detailsElement = prosConsToggleButton.closest('details');
-    //     if (detailsElement) {
-    //     detailsElement.open = false;
-    //     }
-    // }
+    const productDetailCons = document.getElementById('product-detail-cons');
+    productDetailCons.innerHTML = '';
+    // Safely access cons if aiProsCons and its 'cons' property exist
+    if (product.aiProsCons && Array.isArray(product.aiProsCons.cons)) {
+        product.aiProsCons.cons.forEach(con => {
+            const listItem = document.createElement('li');
+            listItem.textContent = con;
+            productDetailCons.appendChild(listItem);
+        });
+    }
+    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
+    // For <details>/<summary>, we ensure the <details> element is closed when a new product is shown.
+    if (prosConsToggleButton) {
+        const detailsElement = prosConsToggleButton.closest('details');
+        if (detailsElement) {
+        detailsElement.open = false;
+        }
+    }
 }
 
 // Get references to the main product list and detail containers
