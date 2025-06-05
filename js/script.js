@@ -34,13 +34,12 @@
 /**
  * Calculates a weighted average Critics Score from an array of critic reviews.
  */
- function calculateCriticsScore(criticReviews) {
-  const weights = {
-    "CNET": 1.2, "TechRadar": 1.1, "The Verge": 1.1, "PCMag": 1.0,
-    "Engadget": 1.0, "Ars Technica": 0.9, "Tom's Guide": 0.9, "Wired": 0.8,
-    "RTINGS.com": 1.2, "FlatpanelsHD": 1.1, "What Hi-Fi?": 1.0,
-    "Digital Trends": 0.9, "default": 0.7
-  };
+// criticWeightsData will be a global variable, populated in DOMContentLoaded
+function calculateCriticsScore(criticReviews) {
+  if (!criticWeightsData || Object.keys(criticWeightsData).length === 0) {
+    console.warn("Critic weights not loaded or empty. Cannot calculate critics score.");
+    return null;
+  }
 
   let totalWeightedScore = 0;
   let totalWeight = 0;
@@ -48,9 +47,17 @@
   criticReviews.forEach(review => {
     const normalizedScore = normalizeScore(review.score, review.scale, 100);
     if (normalizedScore !== null) {
-      const publicationWeight = weights[review.publication] || weights.default;
-      totalWeightedScore += normalizedScore * publicationWeight;
-      totalWeight += publicationWeight;
+      let publicationWeight = criticWeightsData[review.publication];
+      if (typeof publicationWeight !== 'number' || isNaN(publicationWeight)) {
+        publicationWeight = criticWeightsData.default; // Fallback to default weight
+      }
+
+      if (typeof publicationWeight === 'number' && !isNaN(publicationWeight)) {
+        totalWeightedScore += normalizedScore * publicationWeight;
+        totalWeight += publicationWeight;
+      } else {
+        console.warn(`No valid weight found for publication "${review.publication}" (and no valid default). Skipping this review score.`);
+      }
     }
   });
 
@@ -94,30 +101,35 @@ function showProductDetail(product) { // Replaced with version from index.html f
         }
     }
 
-    const productDetailPros = document.getElementById('product-detail-pros');
-    productDetailPros.innerHTML = '';
-    product.aiProsCons.pros.forEach(pro => {
-        const listItem = document.createElement('li');
-        listItem.textContent = pro;
-        productDetailPros.appendChild(listItem);
-    });
+    // const productDetailPros = document.getElementById('product-detail-pros');
+    // productDetailPros.innerHTML = '';
+    // // Safely access pros if aiProsCons and its 'pros' property exist
+    // if (product.aiProsCons && Array.isArray(product.aiProsCons.pros)) {
+    //     product.aiProsCons.pros.forEach(pro => {
+    //         const listItem = document.createElement('li');
+    //         listItem.textContent = pro;
+    //         productDetailPros.appendChild(listItem);
+    //     });
+    // }
 
-    const productDetailCons = document.getElementById('product-detail-cons');
-    productDetailCons.innerHTML = '';
-    product.aiProsCons.cons.forEach(con => {
-        const listItem = document.createElement('li');
-        listItem.textContent = con;
-        productDetailCons.appendChild(listItem);
-    });
-
-    const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
-    // For <details>/<summary>, we ensure the <details> element is closed when a new product is shown.
-    if (prosConsToggleButton) {
-        const detailsElement = prosConsToggleButton.closest('details');
-        if (detailsElement) {
-        detailsElement.open = false;
-        }
-    }
+    // // const productDetailCons = document.getElementById('product-detail-cons');
+    // // productDetailCons.innerHTML = '';
+    // // // Safely access cons if aiProsCons and its 'cons' property exist
+    // // if (product.aiProsCons && Array.isArray(product.aiProsCons.cons)) {
+    // //     product.aiProsCons.cons.forEach(con => {
+    // //         const listItem = document.createElement('li');
+    // //         listItem.textContent = con;
+    // //         productDetailCons.appendChild(listItem);
+    // //     });
+    // // }
+    // const prosConsToggleButton = document.getElementById('pros-cons-toggle-btn');
+    // // For <details>/<summary>, we ensure the <details> element is closed when a new product is shown.
+    // if (prosConsToggleButton) {
+    //     const detailsElement = prosConsToggleButton.closest('details');
+    //     if (detailsElement) {
+    //     detailsElement.open = false;
+    //     }
+    // }
 }
 
 // Get references to the main product list and detail containers
@@ -215,54 +227,140 @@ function displayProducts(products) {
 
 
 // This variable will hold the fetched product data
-let productsData = [];
+let productsData = {}; // Initialize as object, as products.json is now an object
+let criticWeightsData = {}; // To store weights from criticWeights.json
 
 // Function to apply filters
+// Function to apply filters
 function applyFilters() {
-    console.log("applyFilters called. productsData length:", productsData.length); // Log productsData
-    const searchTerm = searchInput ? searchInput.value.toLowerCase() : ""; // searchInput is now defined below
+    // Ensure data is loaded before filtering. productsData is now an object.
+    if (Object.keys(productsData).length === 0 || Object.keys(criticWeightsData).length === 0) {
+        console.log("applyFilters called, but data (products or weights) not yet fully loaded or empty.");
+        displayProducts([]); // Display no products if data isn't ready
+        return;
+    }
+    console.log("applyFilters called. productsData categories:", Object.keys(productsData).length, "criticWeightsData keys:", Object.keys(criticWeightsData).length);
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
     const selectedCategory = categoryFilter ? categoryFilter.value : "all";
 
-    const filteredProducts = productsData.filter(product => { // productsData will be populated by fetch
+    let productsToFilter = [];
+
+    if (selectedCategory === 'all') {
+        // Flatten all products from all categories
+        for (const categoryKey in productsData) {
+            if (productsData.hasOwnProperty(categoryKey) && Array.isArray(productsData[categoryKey])) {
+                productsToFilter = productsToFilter.concat(productsData[categoryKey]);
+            }
+        }
+    } else if (productsData[selectedCategory] && Array.isArray(productsData[selectedCategory])) {
+        // Use only products from the selected category
+        productsToFilter = productsData[selectedCategory];
+    } else {
+        // Selected category does not exist in data or is not an array
+        console.warn(`Category "${selectedCategory}" not found or invalid in productsData.`);
+        productsToFilter = [];
+    }
+
+    const filteredProducts = productsToFilter.filter(product => {
         const matchesSearchTerm =
             product.productName.toLowerCase().includes(searchTerm) ||
             product.brand.toLowerCase().includes(searchTerm);
-        const matchesCategory =
-            selectedCategory === 'all' || product.category === selectedCategory;
-        return matchesSearchTerm && matchesCategory;
+        // Category filtering is already handled by how productsToFilter is constructed
+        return matchesSearchTerm;
     });
-    console.log("Filtered products count:", filteredProducts.length);
-    displayProducts(filteredProducts);
+    displayProducts(filteredProducts); // displayProducts expects an array
 }
 
 // Get references to the HTML elements for filtering (moved here for scope)
 const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
 
+// Function to populate the category filter dropdown
+function populateCategoryFilter(categories) {
+    if (!categoryFilter) return;
+
+    // Preserve the "All Categories" option if it exists, or create it
+    let allOption = categoryFilter.querySelector('option[value="all"]');
+    categoryFilter.innerHTML = ''; // Clear existing options
+    if (!allOption) {
+        allOption = document.createElement('option');
+        allOption.value = "all";
+        allOption.textContent = "All Categories";
+    }
+    categoryFilter.appendChild(allOption);
+
+    categories.sort().forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+    });
+}
 // Consolidated DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', async () => { // Make it async
-    console.log("DOMContentLoaded: Main Setup Initiated (merged).");
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log("DOMContentLoaded: Main Setup Initiated.");
 
     try {
-        const response = await fetch('js/products.json'); // Path to your new JSON file
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        productsData = await response.json(); // Assign fetched data to the global productsData
+        // Fetch both products and critic weights concurrently
+        const [productsResponse, weightsResponse] = await Promise.all([
+            fetch('js/products.json'),
+            fetch('js/criticWeights.json')
+        ]);
 
-        if (productsData && productsData.length > 0) {
-            console.log("Products data loaded successfully:", productsData);
-            console.log("DOMContentLoaded: productsData fetched successfully. Applying initial filters/display.");
-            applyFilters(); // Now call applyFilters, which uses the fetched productsData
+        if (!productsResponse.ok) {
+            throw new Error(`HTTP error! status: ${productsResponse.status} for products.json`);
+        }
+        if (!weightsResponse.ok) {
+            throw new Error(`HTTP error! status: ${weightsResponse.status} for criticWeights.json`);
+        }
+
+        productsData = await productsResponse.json();
+        // --- Start Enhanced Debug Logging ---
+        console.log("Fetched products.json. Status:", productsResponse.status);
+        console.log("Raw productsData after parsing:", productsData);
+        if (productsData === null) {
+            console.log("Detailed check: productsData is null.");
+        } else if (typeof productsData !== 'object') {
+            console.log("Detailed check: productsData is not an object. Type:", typeof productsData);
+        } else if (Array.isArray(productsData)) {
+            console.log("Detailed check: productsData is an array. Length:", productsData.length);
         } else {
-            console.error("DOMContentLoaded: Fetched productsData is empty or undefined.");
+            console.log("Detailed check: productsData is an object. Keys:", Object.keys(productsData));
+        }
+        // --- End Enhanced Debug Logging ---
+
+        criticWeightsData = await weightsResponse.json(); // Store fetched weights
+        console.log("Fetched criticWeights.json. Status:", weightsResponse.status, "Data:", criticWeightsData);
+
+        // productsData is now an object, so check Object.keys().length
+        const productsLoaded = productsData && Object.keys(productsData).length > 0;
+        const weightsLoaded = criticWeightsData && Object.keys(criticWeightsData).length > 0;
+        if (productsLoaded) {
+            populateCategoryFilter(Object.keys(productsData)); // Populate categories as soon as product data is available
+        }
+
+        if (productsLoaded && weightsLoaded) { // Apply filters only when all data is ready
+            console.log("Products data loaded successfully:", productsData);
+            console.log("Critic weights loaded successfully:", criticWeightsData);
+            console.log("DOMContentLoaded: All data fetched successfully. Populated categories and applying initial filters/display.");
+            applyFilters();
+        } else {
+            let errorMessage = "Could not load necessary data. ";
+            if (!productsLoaded) {
+                console.error("DOMContentLoaded: Fetched productsData is empty or undefined.");
+                errorMessage += "Products data missing. ";
+            }
+            if (!weightsLoaded) {
+                console.error("DOMContentLoaded: Fetched criticWeightsData is empty or undefined.");
+                errorMessage += "Critic weights missing. ";
+            }
             if (productListDiv) { // Use the globally defined productListDiv
-                productListDiv.innerHTML = '<p class="text-center text-gray-600 col-span-full">No products found.</p>';
+                productListDiv.innerHTML = `<p class="text-center text-gray-600 col-span-full">${errorMessage.trim()}</p>`;
             }
         }
     } catch (error) {
-        console.error("DOMContentLoaded: Error fetching or parsing productsData:", error);
-        if (productListDiv) productListDiv.innerHTML = '<p class="text-center text-gray-600 col-span-full">Could not load product data.</p>';
+        console.error("DOMContentLoaded: Error fetching or parsing data:", error);
+        if (productListDiv) productListDiv.innerHTML = '<p class="text-center text-gray-600 col-span-full">Could not load product data or critic weights.</p>';
     }
 
     // Event listener for 'Back to Products' button
@@ -298,5 +396,5 @@ document.addEventListener('DOMContentLoaded', async () => { // Make it async
         });
     });
 
-    console.log("DOMContentLoaded: Main Setup Finished (merged).");
+    console.log("DOMContentLoaded: Main Setup Finished.");
 });
